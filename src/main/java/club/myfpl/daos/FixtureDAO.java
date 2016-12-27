@@ -1,0 +1,14 @@
+package club.myfpl.daos;
+
+import club.myfpl.beans.Fixture;
+
+import java.util.List;
+
+/**
+ * User: Saket
+ * Date: 15/12/16
+ * Time: 6:15 PM
+ */
+public interface FixtureDAO {
+    void updateFixtures(List<Fixture> fixtures);
+}
