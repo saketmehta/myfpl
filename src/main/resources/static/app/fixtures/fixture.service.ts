@@ -4,7 +4,7 @@ import "rxjs/add/operator/toPromise";
 import {Fixture} from "./fixture";
 @Injectable()
 export class FixtureService {
-  private fixturesUrl = 'fixtures/current';
+  private fixturesUrl = 'rest/fixtures/current';
 
   constructor(private http: Http) {
   }
