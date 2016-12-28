@@ -2,6 +2,7 @@ package club.myfpl.daos.impl;
 
 import club.myfpl.beans.Fixture;
 import club.myfpl.daos.FixtureDAO;
+import club.myfpl.daos.StatusDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,10 +21,12 @@ import java.util.List;
 public class FixtureDAOImpl implements FixtureDAO {
 
     private final MongoTemplate mongoTemplate;
+    private StatusDAO statusDAO;
 
     @Autowired
-    public FixtureDAOImpl(MongoTemplate mongoTemplate) {
+    public FixtureDAOImpl(MongoTemplate mongoTemplate, StatusDAO statusDAO) {
         this.mongoTemplate = mongoTemplate;
+        this.statusDAO = statusDAO;
     }
 
     @Override
@@ -39,5 +42,11 @@ public class FixtureDAOImpl implements FixtureDAO {
             update.set(Fixture.TEAM_HOME_SCORE_KEY, fixture.getTeamHomeScore());
             mongoTemplate.upsert(Query.query(Criteria.where(Fixture.FIXTURE_ID_KEY).is(fixture.getFixtureId())), update, Fixture.class);
         }
+    }
+
+    @Override
+    public List<Fixture> getCurrentFixtures() {
+        Long currentEvent = statusDAO.fetchCurrentEvent();
+        return mongoTemplate.find(Query.query(Criteria.where(Fixture.EVENT_KEY).is(currentEvent)), Fixture.class);
     }
 }

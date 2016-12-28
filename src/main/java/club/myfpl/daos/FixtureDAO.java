@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface FixtureDAO {
     void updateFixtures(List<Fixture> fixtures);
+
+    List<Fixture> getCurrentFixtures();
 }
