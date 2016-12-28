@@ -33,8 +33,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jersey')
     compile('org.springframework.boot:spring-boot-starter-validation')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-social-facebook')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
@@ -44,7 +42,6 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
-
 
     compile group: 'com.auth0', name: 'java-jwt', version: '3.0.2'
 }

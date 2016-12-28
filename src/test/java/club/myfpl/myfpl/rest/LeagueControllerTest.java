@@ -24,7 +24,7 @@ public class LeagueControllerTest {
         leagueDTO.setAdminUserId(1011);
         leagueDTO.setCapacity(5);
         leagueDTO.setInviteCode("abc");
-        leagueController.createLeague(leagueDTO);
+        leagueController.createorUpdateLeague(leagueDTO);
     }
 
     @Test
@@ -43,6 +43,6 @@ public class LeagueControllerTest {
         leagueDTO.setAdminUserId(1011);
         leagueDTO.setCapacity(5);
         leagueDTO.setInviteCode("abc");
-        leagueController.updateLeague(leagueDTO);
+        leagueController.createorUpdateLeague(leagueDTO);
     }
 }
