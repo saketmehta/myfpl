@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 /**
  * User: Saket
  * Date: 14/12/16
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Service
 @RestController
-@RequestMapping("league")
+@RequestMapping("leagues")
 public class LeagueController {
 
     private final ValidationService validationService;
@@ -33,8 +35,9 @@ public class LeagueController {
         return ResponseEntity.ok(leagueService.fetchLeague(leagueId));
     }
 
-    @GetMapping("fetch/all/{userId}")
-    public ResponseEntity fetchLeagues(@PathVariable long userId) {
+    @GetMapping("fetch/all")
+    public ResponseEntity fetchLeagues(Principal principal) {
+        long userId = 1000;
         return ResponseEntity.ok(leagueService.fetchLeaguesForUser(userId));
     }
 

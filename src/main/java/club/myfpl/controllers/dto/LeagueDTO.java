@@ -18,6 +18,7 @@ public class LeagueDTO {
     private long adminUserId;
     @Range(min = 2, max = 5)
     private long capacity;
+    @NotBlank
     private String inviteCode;
 
     public long getLeagueId() {

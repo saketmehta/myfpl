@@ -49,4 +49,9 @@ public class FixtureDAOImpl implements FixtureDAO {
         Long currentEvent = statusDAO.fetchCurrentEvent();
         return mongoTemplate.find(Query.query(Criteria.where(Fixture.EVENT_KEY).is(currentEvent)), Fixture.class);
     }
+
+    @Override
+    public Fixture fetchFixture(long fixtureId) {
+        return mongoTemplate.findOne(Query.query(Criteria.where(Fixture.FIXTURE_ID_KEY).is(fixtureId)), Fixture.class);
+    }
 }

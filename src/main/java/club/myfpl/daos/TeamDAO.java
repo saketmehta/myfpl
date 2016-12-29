@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface TeamDAO {
     void updateTeams(List<Team> teams);
+
+    List<Team> fetchTeams();
 }

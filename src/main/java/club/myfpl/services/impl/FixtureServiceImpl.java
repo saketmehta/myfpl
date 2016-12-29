@@ -26,4 +26,9 @@ public class FixtureServiceImpl implements FixtureService {
     public List<Fixture> fetchCurrentFixtures() {
         return fixtureDAO.getCurrentFixtures();
     }
+
+    @Override
+    public Fixture fetchFixture(long fixtureId) {
+        return fixtureDAO.fetchFixture(fixtureId);
+    }
 }

@@ -35,4 +35,9 @@ public class TeamDAOImpl implements TeamDAO {
             mongoTemplate.upsert(Query.query(Criteria.where(Team.TEAM_ID_KEY).is(team.getTeamId())), update, Team.class);
         }
     }
+
+    @Override
+    public List<Team> fetchTeams() {
+        return mongoTemplate.findAll(Team.class);
+    }
 }

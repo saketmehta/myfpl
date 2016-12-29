@@ -13,4 +13,6 @@ public interface FixtureDAO {
     void updateFixtures(List<Fixture> fixtures);
 
     List<Fixture> getCurrentFixtures();
+
+    Fixture fetchFixture(long fixtureId);
 }

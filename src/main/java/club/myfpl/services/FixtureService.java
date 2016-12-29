@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface FixtureService {
     List<Fixture> fetchCurrentFixtures();
+
+    Fixture fetchFixture(long fixtureId);
 }
