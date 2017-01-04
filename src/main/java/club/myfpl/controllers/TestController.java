@@ -1,9 +1,10 @@
 package club.myfpl.controllers;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 /**
  * User: Saket
@@ -12,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Service
 @RestController
-@RequestMapping(value = "test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "test")
 public class TestController {
 
     @RequestMapping
-    public String testing() {
-        return "Hello!";
+    public Principal testing(Principal principal) {
+        return principal;
     }
 }

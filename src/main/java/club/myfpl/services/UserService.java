@@ -1,6 +1,6 @@
 package club.myfpl.services;
 
-import club.myfpl.beans.User;
+import club.myfpl.model.User;
 
 /**
  * User: Saket

@@ -1,4 +1,4 @@
-package club.myfpl.beans;
+package club.myfpl.model;
 
 /**
  * User: Saket

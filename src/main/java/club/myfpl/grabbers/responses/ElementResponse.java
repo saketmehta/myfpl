@@ -1,6 +1,6 @@
 package club.myfpl.grabbers.responses;
 
-import club.myfpl.beans.Element;
+import club.myfpl.model.Element;
 
 /**
  * User: Saket

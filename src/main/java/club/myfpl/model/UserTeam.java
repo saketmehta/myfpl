@@ -1,4 +1,4 @@
-package club.myfpl.beans;
+package club.myfpl.model;
 
 import club.myfpl.utils.Tuple;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -1,8 +1,8 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.beans.League;
-import club.myfpl.beans.SequenceNumber;
-import club.myfpl.beans.User;
+import club.myfpl.model.League;
+import club.myfpl.model.SequenceNumber;
+import club.myfpl.model.User;
 import club.myfpl.services.SequenceNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;

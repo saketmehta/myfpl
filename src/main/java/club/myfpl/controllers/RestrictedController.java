@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Service
 @RestController
-@RequestMapping("restricted")
+@RequestMapping("/admin")
 public class RestrictedController {
 
     private final LeagueService leagueService;

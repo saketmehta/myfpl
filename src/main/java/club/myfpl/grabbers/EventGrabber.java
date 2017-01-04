@@ -1,14 +1,14 @@
 package club.myfpl.grabbers;
 
-import club.myfpl.beans.ElementStats;
-import club.myfpl.beans.Event;
-import club.myfpl.beans.Fixture;
 import club.myfpl.daos.ElementStatsDAO;
 import club.myfpl.daos.EventDAO;
 import club.myfpl.daos.FixtureDAO;
 import club.myfpl.daos.StatusDAO;
 import club.myfpl.grabbers.responses.EventDataResponse;
 import club.myfpl.grabbers.responses.FixtureResponse;
+import club.myfpl.model.ElementStats;
+import club.myfpl.model.Event;
+import club.myfpl.model.Fixture;
 import club.myfpl.utils.JsonUtils;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;

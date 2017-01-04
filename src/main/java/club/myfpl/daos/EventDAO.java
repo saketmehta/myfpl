@@ -1,6 +1,6 @@
 package club.myfpl.daos;
 
-import club.myfpl.beans.Event;
+import club.myfpl.model.Event;
 
 /**
  * User: Saket

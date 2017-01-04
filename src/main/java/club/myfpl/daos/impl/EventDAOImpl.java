@@ -1,7 +1,7 @@
 package club.myfpl.daos.impl;
 
-import club.myfpl.beans.Event;
 import club.myfpl.daos.EventDAO;
+import club.myfpl.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

@@ -1,7 +1,7 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.beans.Team;
 import club.myfpl.daos.TeamDAO;
+import club.myfpl.model.Team;
 import club.myfpl.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

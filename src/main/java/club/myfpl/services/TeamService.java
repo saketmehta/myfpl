@@ -1,6 +1,6 @@
 package club.myfpl.services;
 
-import club.myfpl.beans.Team;
+import club.myfpl.model.Team;
 
 import java.util.List;
 

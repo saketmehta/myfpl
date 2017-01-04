@@ -1,6 +1,6 @@
 package club.myfpl.daos;
 
-import club.myfpl.beans.User;
+import club.myfpl.model.User;
 
 /**
  * @author Saket on 15/09/16.

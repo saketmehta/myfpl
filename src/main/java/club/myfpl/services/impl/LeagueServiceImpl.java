@@ -1,7 +1,7 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.beans.League;
 import club.myfpl.daos.LeagueDAO;
+import club.myfpl.model.League;
 import club.myfpl.services.LeagueService;
 import club.myfpl.services.SequenceNumberService;
 import club.myfpl.services.UserService;

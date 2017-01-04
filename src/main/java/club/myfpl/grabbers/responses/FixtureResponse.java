@@ -1,6 +1,6 @@
 package club.myfpl.grabbers.responses;
 
-import club.myfpl.beans.Fixture;
+import club.myfpl.model.Fixture;
 
 /**
  * User: Saket

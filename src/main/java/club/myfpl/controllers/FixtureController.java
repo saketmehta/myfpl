@@ -1,6 +1,6 @@
 package club.myfpl.controllers;
 
-import club.myfpl.beans.Fixture;
+import club.myfpl.model.Fixture;
 import club.myfpl.services.FixtureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

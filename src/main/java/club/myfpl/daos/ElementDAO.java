@@ -1,6 +1,6 @@
 package club.myfpl.daos;
 
-import club.myfpl.beans.Element;
+import club.myfpl.model.Element;
 
 import java.util.List;
 

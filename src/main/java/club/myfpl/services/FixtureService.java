@@ -1,6 +1,6 @@
 package club.myfpl.services;
 
-import club.myfpl.beans.Fixture;
+import club.myfpl.model.Fixture;
 
 import java.util.List;
 

@@ -26,4 +26,8 @@ public class JsonUtils {
         Reader reader = new InputStreamReader(inputStream);
         return GSON.fromJson(reader, clazz);
     }
+
+    public static String toJson(Object data) {
+        return GSON.toJson(data);
+    }
 }

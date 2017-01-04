@@ -1,12 +1,12 @@
 package club.myfpl.grabbers;
 
-import club.myfpl.beans.Element;
-import club.myfpl.beans.Team;
 import club.myfpl.daos.ElementDAO;
 import club.myfpl.daos.TeamDAO;
 import club.myfpl.grabbers.responses.BootstrapStaticDataResponse;
 import club.myfpl.grabbers.responses.ElementResponse;
 import club.myfpl.grabbers.responses.TeamResponse;
+import club.myfpl.model.Element;
+import club.myfpl.model.Team;
 import club.myfpl.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

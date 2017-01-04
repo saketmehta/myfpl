@@ -1,4 +1,4 @@
-package club.myfpl.beans;
+package club.myfpl.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.mongodb.core.index.Indexed;

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {Team} from "./team";
+import {Team} from "../_models/team";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/toPromise";
 import "rxjs/add/operator/map";

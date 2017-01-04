@@ -1,6 +1,6 @@
 package club.myfpl.controllers.dto;
 
-import club.myfpl.beans.League;
+import club.myfpl.model.League;
 import com.google.common.collect.Sets;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;

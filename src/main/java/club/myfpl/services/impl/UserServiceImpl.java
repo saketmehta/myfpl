@@ -1,7 +1,7 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.beans.User;
 import club.myfpl.daos.UserDAO;
+import club.myfpl.model.User;
 import club.myfpl.services.SequenceNumberService;
 import club.myfpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

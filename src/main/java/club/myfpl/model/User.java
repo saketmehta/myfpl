@@ -1,10 +1,10 @@
-package club.myfpl.beans;
+package club.myfpl.model;
 
-import club.myfpl.security.Role;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Saket on 15/09/16.
@@ -15,7 +15,7 @@ public class User {
     public static final String EMAIL_KEY = "email";
     public static final String PASSWORD_KEY = "password";
     public static final String FULL_NAME_KEY = "fullName";
-    public static final String SUPERUSER_KEY = "superuser";
+    public static final String ROLES_KEY = "roles";
 
     private String id;
     private long userId;
@@ -23,7 +23,7 @@ public class User {
     private String email;
     private String password;
     private String fullName;
-    private List<Role> roles;
+    private List<String> roles;
 
     public String getId() {
         return id;
@@ -65,11 +65,15 @@ public class User {
         this.fullName = fullName;
     }
 
-    public List<Role> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public String rolesAsCommaSeparatedString() {
+        return this.roles.stream().collect(Collectors.joining(","));
     }
 }

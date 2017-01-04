@@ -1,6 +1,7 @@
-package club.myfpl.security;
+package club.myfpl.security.services;
 
-import club.myfpl.beans.User;
+import club.myfpl.model.User;
+import club.myfpl.security.model.AuthenticatedUser;
 import club.myfpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

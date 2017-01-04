@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {Fixture} from "./fixture";
+import {Fixture} from "../_models/fixture";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/toPromise";
 import "rxjs/add/operator/map";

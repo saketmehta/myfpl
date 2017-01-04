@@ -1,4 +1,4 @@
-package club.myfpl.beans;
+package club.myfpl.model;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;

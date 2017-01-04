@@ -1,6 +1,6 @@
 package club.myfpl.controllers.dto;
 
-import club.myfpl.beans.User;
+import club.myfpl.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotBlank;
 

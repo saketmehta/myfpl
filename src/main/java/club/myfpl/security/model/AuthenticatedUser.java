@@ -1,9 +1,9 @@
-package club.myfpl.security;
+package club.myfpl.security.model;
 
-import club.myfpl.beans.User;
-import com.google.common.collect.Lists;
+import club.myfpl.model.User;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -16,26 +16,21 @@ import java.util.List;
  */
 public class AuthenticatedUser implements UserDetails {
 
-    private User user;
+    private final User user;
 
-    AuthenticatedUser(User user) {
+    public AuthenticatedUser(User user) {
         this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = Lists.newArrayList();
-        if (user.getRoles() == null) {
-            user.setRoles(Lists.newArrayList(Role.USER));
+        List<GrantedAuthority> authorities;
+        if (CollectionUtils.isEmpty(user.getRoles())) {
+            authorities = AuthorityUtils.createAuthorityList("USER");
+        } else {
+            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.rolesAsCommaSeparatedString());
         }
-        for (Role role : user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.name()));
-        }
-        return grantedAuthorities;
+        return authorities;
     }
 
     @Override

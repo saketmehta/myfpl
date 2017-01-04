@@ -1,7 +1,7 @@
 package club.myfpl.controllers;
 
-import club.myfpl.beans.User;
 import club.myfpl.controllers.dto.UserDTO;
+import club.myfpl.model.User;
 import club.myfpl.services.UserService;
 import club.myfpl.validation.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;

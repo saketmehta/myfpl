@@ -1,9 +1,9 @@
 package club.myfpl.grabbers;
 
-import club.myfpl.beans.Status;
 import club.myfpl.daos.StatusDAO;
 import club.myfpl.grabbers.responses.BootstrapDynamicDataResponse;
 import club.myfpl.grabbers.responses.FixtureResponse;
+import club.myfpl.model.Status;
 import club.myfpl.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

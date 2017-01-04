@@ -1,6 +1,6 @@
 package club.myfpl.daos;
 
-import club.myfpl.beans.Status;
+import club.myfpl.model.Status;
 
 /**
  * User: Saket
