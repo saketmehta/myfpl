@@ -14,33 +14,36 @@ import java.util.List;
  * Date: 27/12/16
  * Time: 4:10 PM
  */
-public class AuthenticatedUser implements UserDetails {
-
-    private final User user;
+public class AuthenticatedUser extends User implements UserDetails {
 
     public AuthenticatedUser(User user) {
-        this.user = user;
+        setId(user.getId());
+        setUserId(user.getUserId());
+        setEmail(user.getEmail());
+        setPassword(user.getPassword());
+        setFullName(user.getFullName());
+        setRoles(user.getRoles());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities;
-        if (CollectionUtils.isEmpty(user.getRoles())) {
+        if (CollectionUtils.isEmpty(this.getRoles())) {
             authorities = AuthorityUtils.createAuthorityList("USER");
         } else {
-            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.rolesAsCommaSeparatedString());
+            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(this.rolesAsCommaSeparatedString());
         }
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return this.getEmail();
     }
 
     @Override

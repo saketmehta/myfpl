@@ -1,22 +1,16 @@
 package club.myfpl.security.jwt;
 
-import club.myfpl.model.User;
-import club.myfpl.services.UserService;
+import club.myfpl.security.model.AuthenticatedUser;
 import club.myfpl.utils.JsonUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * User: Saket
@@ -29,18 +23,11 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
     private static final String TOKEN_PREFIX = "Bearer";
     private static final String HEADER_KEY = "Authorization";
 
-    private final UserService userService;
-
-    @Autowired
-    public TokenAuthenticationServiceImpl(UserService userService) {
-        this.userService = userService;
-    }
-
     @Override
-    public void addAuthentication(HttpServletResponse response, String email) {
-        User user = userService.fetchUserByEmail(email);
-        Claims claims = Jwts.claims().setSubject(user.getEmail());
-        claims.put("user", JsonUtils.toJson(user));
+    public void addAuthentication(HttpServletResponse response, Authentication authentication) {
+        AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
+        Claims claims = Jwts.claims().setSubject(authenticatedUser.getEmail());
+        claims.put("user", JsonUtils.toJson(authenticatedUser));
         String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, SECRET).compact();
         response.addHeader(HEADER_KEY, TOKEN_PREFIX + " " + token);
     }
@@ -52,15 +39,9 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
         }
         token = token.substring(TOKEN_PREFIX.length());
         Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
-        User user = JsonUtils.fromJson((String) claims.get("user"), User.class);
-        if (user != null && user.getEmail() != null) {
-            List<GrantedAuthority> authorities;
-            if (CollectionUtils.isEmpty(user.getRoles())) {
-                authorities = AuthorityUtils.createAuthorityList("USER");
-            } else {
-                authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.rolesAsCommaSeparatedString());
-            }
-            return new JwtAuthentication(authorities, token, user);
+        AuthenticatedUser authenticatedUser = JsonUtils.fromJson((String) claims.get("user"), AuthenticatedUser.class);
+        if (authenticatedUser != null) {
+            return new JwtAuthentication(token, authenticatedUser);
         }
         return null;
     }

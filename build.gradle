@@ -33,7 +33,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jersey')
     compile('org.springframework.boot:spring-boot-starter-validation')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-security')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     compile group: 'com.google.guava', name: 'guava', version: '19.0'

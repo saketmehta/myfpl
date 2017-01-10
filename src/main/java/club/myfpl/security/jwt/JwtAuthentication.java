@@ -1,10 +1,7 @@
 package club.myfpl.security.jwt;
 
-import club.myfpl.model.User;
+import club.myfpl.security.model.AuthenticatedUser;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 
 /**
  * User: Saket
@@ -13,14 +10,13 @@ import java.util.Collection;
  */
 public class JwtAuthentication extends AbstractAuthenticationToken {
     private String token;
-    private User user;
+    private AuthenticatedUser authenticatedUser;
 
-    JwtAuthentication(Collection<? extends GrantedAuthority> authorities, String token, User user) {
-        super(authorities);
+    JwtAuthentication(String token, AuthenticatedUser authenticatedUser) {
+        super(authenticatedUser.getAuthorities());
         this.token = token;
-        this.user = user;
+        this.authenticatedUser = authenticatedUser;
         setAuthenticated(true);
-        setDetails(user);
     }
 
     @Override
@@ -30,6 +26,6 @@ public class JwtAuthentication extends AbstractAuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return user.getEmail();
+        return authenticatedUser;
     }
 }

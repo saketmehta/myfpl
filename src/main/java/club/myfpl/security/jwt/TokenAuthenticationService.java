@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 8:02 PM
  */
 public interface TokenAuthenticationService {
-    void addAuthentication(HttpServletResponse response, String username);
+    void addAuthentication(HttpServletResponse response, Authentication username);
 
     Authentication getAuthentication(HttpServletRequest request);
 }

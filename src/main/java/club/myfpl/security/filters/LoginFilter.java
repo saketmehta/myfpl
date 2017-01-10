@@ -41,8 +41,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String email = authResult.getName();
-        tokenAuthenticationService.addAuthentication(response, email);
+        tokenAuthenticationService.addAuthentication(response, authResult);
     }
 
     private class AccountCredentials {
