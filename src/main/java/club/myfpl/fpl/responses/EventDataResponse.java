@@ -1,4 +1,4 @@
-package club.myfpl.grabbers.responses;
+package club.myfpl.fpl.responses;
 
 import java.util.List;
 import java.util.Map;
@@ -51,5 +51,4 @@ public class EventDataResponse {
             }
         }
     }
-
 }

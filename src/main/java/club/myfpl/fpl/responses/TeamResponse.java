@@ -1,4 +1,4 @@
-package club.myfpl.grabbers.responses;
+package club.myfpl.fpl.responses;
 
 import club.myfpl.model.Team;
 

@@ -2,12 +2,10 @@ package club.myfpl.controllers;
 
 import club.myfpl.controllers.dto.LeagueDTO;
 import club.myfpl.model.League;
-import club.myfpl.security.model.AuthenticatedUser;
 import club.myfpl.services.LeagueService;
 import club.myfpl.validation.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +34,8 @@ public class LeagueController {
     }
 
     @GetMapping("fetch/all")
-    public ResponseEntity fetchLeagues(@AuthenticationPrincipal AuthenticatedUser authenticatedUser) {
-        return ResponseEntity.ok(leagueService.fetchLeaguesForUser(authenticatedUser.getUserId()));
+    public ResponseEntity fetchLeagues() {
+        return ResponseEntity.ok(leagueService.fetchLeaguesForUser(1000));
     }
 
     @PostMapping({"create", "update"})

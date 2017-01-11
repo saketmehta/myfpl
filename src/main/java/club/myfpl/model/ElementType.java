@@ -1,4 +1,4 @@
-package club.myfpl.enums;
+package club.myfpl.model;
 
 /**
  * User: Saket

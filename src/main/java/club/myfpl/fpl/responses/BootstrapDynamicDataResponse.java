@@ -1,4 +1,4 @@
-package club.myfpl.grabbers.responses;
+package club.myfpl.fpl.responses;
 
 import com.google.gson.annotations.SerializedName;
 
