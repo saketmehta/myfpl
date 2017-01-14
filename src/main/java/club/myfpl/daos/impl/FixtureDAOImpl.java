@@ -21,7 +21,7 @@ import java.util.List;
 public class FixtureDAOImpl implements FixtureDAO {
 
     private final MongoTemplate mongoTemplate;
-    private StatusDAO statusDAO;
+    private       StatusDAO     statusDAO;
 
     @Autowired
     public FixtureDAOImpl(MongoTemplate mongoTemplate, StatusDAO statusDAO) {

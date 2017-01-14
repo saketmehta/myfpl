@@ -2,6 +2,7 @@ package club.myfpl.auth;
 
 import club.myfpl.model.User;
 import club.myfpl.services.UserService;
+import club.myfpl.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,8 @@ public class AuthEndpoint {
     public Response authenticate(@FormParam("username") String username, @FormParam("password") String password, @Context HttpServletRequest request) {
         Optional<User> user = doAuthenticate(username, password);
         if (user.isPresent()) {
-            request.getSession(true).setAttribute("user", user.get());
+            request.getSession().invalidate();
+            SessionUtils.setUser(request, user.get());
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED).build();

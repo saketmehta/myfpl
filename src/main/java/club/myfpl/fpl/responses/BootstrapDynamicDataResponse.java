@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class BootstrapDynamicDataResponse {
     @SerializedName("current-event")
-    private long currentEvent;
+    private long                  currentEvent;
     @SerializedName("next-event")
-    private long nextEvent;
+    private long                  nextEvent;
     private List<FixtureResponse> next_event_fixtures;
 
     public long getCurrentEvent() {

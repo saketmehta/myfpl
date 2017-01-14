@@ -8,7 +8,7 @@ import club.myfpl.model.Team;
  * Time: 5:37 PM
  */
 public class TeamResponse {
-    private long id;
+    private long   id;
     private String name;
     private String short_name;
 

@@ -11,9 +11,9 @@ import java.util.List;
  */
 @Document
 public class Status {
-    private String id;
-    private long currentEvent;
-    private long nextEvent;
+    private String        id;
+    private long          currentEvent;
+    private long          nextEvent;
     private List<Fixture> nextEventFixtures;
 
     public String getId() {

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class BootstrapStaticDataResponse {
     private List<ElementResponse> elements;
-    private List<TeamResponse> teams;
+    private List<TeamResponse>    teams;
 
     public List<ElementResponse> getElements() {
         return elements;

@@ -7,8 +7,8 @@ package club.myfpl.model;
  */
 public class SequenceNumber {
     private String id;
-    private long userSeqNumber;
-    private long leagueSeqNumber;
+    private long   userSeqNumber;
+    private long   leagueSeqNumber;
 
     public String getId() {
         return id;

@@ -11,12 +11,12 @@ import java.util.Set;
  */
 @Document
 public class UserTeam {
-    private String id;
-    private Long teamId;
-    private Long leagueId;
-    private Long userId;
-    private Set<Long> elements;
-    private Long event;
+    private String                  id;
+    private Long                    teamId;
+    private Long                    leagueId;
+    private Long                    userId;
+    private Set<Long>               elements;
+    private Long                    event;
     private List<Tuple<Long, Long>> transfers;
 
     public String getId() {

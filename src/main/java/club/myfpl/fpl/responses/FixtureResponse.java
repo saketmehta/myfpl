@@ -8,14 +8,14 @@ import club.myfpl.model.Fixture;
  * Time: 5:35 PM
  */
 public class FixtureResponse {
-    private long id;
+    private long   id;
     private String kickoff_time_formatted;
     private String kickoff_time;
-    private Long event;
-    private Long team_a;
-    private Long team_h;
-    private long team_a_score;
-    private long team_h_score;
+    private Long   event;
+    private Long   team_a;
+    private Long   team_h;
+    private long   team_a_score;
+    private long   team_h_score;
 
     public long getId() {
         return id;

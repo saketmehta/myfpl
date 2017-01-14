@@ -6,14 +6,14 @@ package club.myfpl.model;
  * Time: 5:10 PM
  */
 public class ElementStats {
-    public static final String ELEMENT_ID_KEY = "elementId";
-    public static final String EVENT_ID_KEY = "eventId";
+    public static final String ELEMENT_ID_KEY   = "elementId";
+    public static final String EVENT_ID_KEY     = "eventId";
     public static final String TOTAL_POINTS_KEY = "totalPoints";
 
     private String id;
-    private long elementId;
-    private long eventId;
-    private long totalPoints;
+    private long   elementId;
+    private long   eventId;
+    private long   totalPoints;
 
     public String getId() {
         return id;

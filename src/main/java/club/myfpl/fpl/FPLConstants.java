@@ -6,9 +6,8 @@ package club.myfpl.fpl;
  * Time: 9:04 PM
  */
 class FPLConstants {
-    static final String BASE_URL = "https://fantasy.premierleague.com/drf";
-
+    static final String BASE_URL                   = "https://fantasy.premierleague.com/drf";
     static final String BOOTSTRAP_DYNAMIC_ENDPOINT = "/bootstrap-dynamic";
-    static final String BOOTSTRAP_STATIC_ENDPOINT = "/bootstrap-static";
-    static final String EVENT_ENDPOINT = "/event/%s/live";
+    static final String BOOTSTRAP_STATIC_ENDPOINT  = "/bootstrap-static";
+    static final String EVENT_ENDPOINT             = "/event/%s/live";
 }

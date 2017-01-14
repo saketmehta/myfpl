@@ -22,8 +22,8 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class LeagueServiceImpl implements LeagueService {
 
-    private final LeagueDAO leagueDAO;
-    private final UserService userService;
+    private final LeagueDAO             leagueDAO;
+    private final UserService           userService;
     private final SequenceNumberService sequenceNumberService;
 
     @Autowired

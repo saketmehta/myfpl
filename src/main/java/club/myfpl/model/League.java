@@ -11,24 +11,24 @@ import java.util.Set;
  */
 @Document
 public class League {
-    public static final String LEAGUE_ID_KEY = "leagueId";
+    public static final String LEAGUE_ID_KEY     = "leagueId";
     public static final String ADMIN_USER_ID_KEY = "adminUserId";
-    public static final String USERS_KEY = "users";
-    public static final String INVITE_CODE_KEY = "inviteCode";
+    public static final String USERS_KEY         = "users";
+    public static final String INVITE_CODE_KEY   = "inviteCode";
 
-    private String id;
+    private String          id;
     @Indexed(unique = true)
-    private long leagueId;
-    private String name;
-    private long adminUserId;
-    private long capacity;
-    private Set<Long> users;
-    private boolean isLocked;
-    private long transferTurnUserId;
-    private long firstTransferUserId;
+    private long            leagueId;
+    private String          name;
+    private long            adminUserId;
+    private long            capacity;
+    private Set<Long>       users;
+    private boolean         isLocked;
+    private long            transferTurnUserId;
+    private long            firstTransferUserId;
     private Map<Long, Long> transferOrder;
     @Indexed(unique = true)
-    private String inviteCode;
+    private String          inviteCode;
 
     public boolean isLocked() {
         return isLocked;

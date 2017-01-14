@@ -11,18 +11,18 @@ import java.util.stream.Collectors;
  */
 @Document
 public class User {
-    public static final String USER_ID_KEY = "userId";
-    public static final String EMAIL_KEY = "email";
-    public static final String PASSWORD_KEY = "password";
+    public static final String USER_ID_KEY   = "userId";
+    public static final String EMAIL_KEY     = "email";
+    public static final String PASSWORD_KEY  = "password";
     public static final String FULL_NAME_KEY = "fullName";
-    public static final String ROLES_KEY = "roles";
+    public static final String ROLES_KEY     = "roles";
 
-    private String id;
-    private long userId;
+    private String       id;
+    private long         userId;
     @Indexed(unique = true)
-    private String email;
-    private String password;
-    private String fullName;
+    private String       email;
+    private String       password;
+    private String       fullName;
     private List<String> roles;
 
     public String getId() {

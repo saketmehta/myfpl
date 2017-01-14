@@ -8,14 +8,14 @@ import club.myfpl.model.Element;
  * Time: 5:36 PM
  */
 public class ElementResponse {
-    private long id;
+    private long   id;
     private String web_name;
     private String first_name;
     private String second_name;
-    private long event_points;
-    private long total_points;
-    private long element_type;
-    private long team;
+    private long   event_points;
+    private long   total_points;
+    private long   element_type;
+    private long   team;
 
     public long getId() {
         return id;

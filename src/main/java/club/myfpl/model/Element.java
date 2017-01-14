@@ -10,25 +10,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Element {
-    public static final String ELEMENT_ID_KEY = "elementId";
-    public static final String WEB_NAME_KEY = "webName";
-    public static final String FIRST_NAME_KEY = "firstName";
-    public static final String SECOND_NAME_KEY = "secondName";
+    public static final String ELEMENT_ID_KEY   = "elementId";
+    public static final String WEB_NAME_KEY     = "webName";
+    public static final String FIRST_NAME_KEY   = "firstName";
+    public static final String SECOND_NAME_KEY  = "secondName";
     public static final String EVENT_POINTS_KEY = "eventPoints";
     public static final String TOTAL_POINTS_KEY = "totalPoints";
     public static final String ELEMENT_TYPE_KEY = "elementType";
-    public static final String TEAM_KEY = "team";
+    public static final String TEAM_KEY         = "team";
 
     private String id;
     @Indexed(unique = true)
-    private long elementId;
+    private long   elementId;
     private String webName;
     private String firstName;
     private String secondName;
-    private Long eventPoints;
-    private Long totalPoints;
-    private Long elementType;
-    private Long team;
+    private Long   eventPoints;
+    private Long   totalPoints;
+    private Long   elementType;
+    private Long   team;
 
     public String getId() {
         return id;

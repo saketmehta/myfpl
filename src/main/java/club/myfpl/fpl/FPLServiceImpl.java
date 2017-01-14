@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 @Service
 public class FPLServiceImpl implements FPLService {
 
-    private final FPLAPIClient apiClient;
-    private final StatusDAO statusDAO;
-    private final TeamDAO teamDAO;
-    private final ElementDAO elementDAO;
-    private final EventDAO eventDAO;
-    private final FixtureDAO fixtureDAO;
+    private final FPLAPIClient    apiClient;
+    private final StatusDAO       statusDAO;
+    private final TeamDAO         teamDAO;
+    private final ElementDAO      elementDAO;
+    private final EventDAO        eventDAO;
+    private final FixtureDAO      fixtureDAO;
     private final ElementStatsDAO elementStatsDAO;
 
     @Autowired
@@ -41,6 +41,7 @@ public class FPLServiceImpl implements FPLService {
     @Override
     public void grabAndSaveBootstrapDynamicData() {
         BootstrapDynamicDataResponse response = apiClient.fetchBootstrapDynamicData();
+
         Status status = new Status();
         status.setCurrentEvent(response.getCurrentEvent());
         status.setNextEvent(response.getNextEvent());
@@ -51,13 +52,13 @@ public class FPLServiceImpl implements FPLService {
     @Override
     public void grabAndSaveBootstrapStaticData() {
         BootstrapStaticDataResponse response = apiClient.fetchBootstrapStaticData();
+
         List<ElementResponse> elementResponses = response.getElements();
-        List<TeamResponse> teamResponses = response.getTeams();
-
         List<Element> elements = elementResponses.stream().map(ElementResponse::toElement).collect(Collectors.toList());
-        List<Team> teams = teamResponses.stream().map(TeamResponse::toTeam).collect(Collectors.toList());
-
         elementDAO.updateElements(elements);
+
+        List<TeamResponse> teamResponses = response.getTeams();
+        List<Team> teams = teamResponses.stream().map(TeamResponse::toTeam).collect(Collectors.toList());
         teamDAO.updateTeams(teams);
     }
 

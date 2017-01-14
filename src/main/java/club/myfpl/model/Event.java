@@ -15,9 +15,9 @@ public class Event {
     public static final String EVENT_ID_KEY = "eventId";
     public static final String FIXTURES_KEY = "fixtures";
 
-    private String id;
+    private String     id;
     @Indexed(unique = true)
-    private long eventId;
+    private long       eventId;
     private List<Long> fixtures;
 
     public String getId() {

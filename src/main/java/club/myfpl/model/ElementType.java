@@ -11,7 +11,7 @@ public enum ElementType {
     MID(3L, "Midfielder", "MID", "Midfielders", "MID"),
     FWD(4L, "Forward", "FWD", "Forwards", "FWD");
 
-    private Long id;
+    private Long   id;
     private String singularName;
     private String singularShortName;
     private String pluralName;

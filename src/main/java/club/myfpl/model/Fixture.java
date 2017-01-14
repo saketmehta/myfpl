@@ -10,25 +10,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Fixture {
-    public static final String FIXTURE_ID_KEY = "fixtureId";
+    public static final String FIXTURE_ID_KEY             = "fixtureId";
     public static final String KICKOFF_TIME_FORMATTED_KEY = "kickoffTimeFormatted";
-    public static final String KICKOFF_TIME_KEY = "kickoffTime";
-    public static final String EVENT_KEY = "event";
-    public static final String TEAM_AWAY_KEY = "teamAway";
-    public static final String TEAM_HOME_KEY = "teamHome";
-    public static final String TEAM_AWAY_SCORE_KEY = "teamAwayScore";
-    public static final String TEAM_HOME_SCORE_KEY = "teamHomeScore";
+    public static final String KICKOFF_TIME_KEY           = "kickoffTime";
+    public static final String EVENT_KEY                  = "event";
+    public static final String TEAM_AWAY_KEY              = "teamAway";
+    public static final String TEAM_HOME_KEY              = "teamHome";
+    public static final String TEAM_AWAY_SCORE_KEY        = "teamAwayScore";
+    public static final String TEAM_HOME_SCORE_KEY        = "teamHomeScore";
 
     private String id;
     @Indexed(unique = true)
-    private long fixtureId;
+    private long   fixtureId;
     private String kickoffTimeFormatted;
     private String kickoffTime;
-    private long event;
-    private long teamAway;
-    private long teamHome;
-    private long teamAwayScore;
-    private long teamHomeScore;
+    private long   event;
+    private long   teamAway;
+    private long   teamHome;
+    private long   teamAwayScore;
+    private long   teamHomeScore;
 
     public String getId() {
         return id;

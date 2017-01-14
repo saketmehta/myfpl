@@ -11,21 +11,21 @@ import org.hibernate.validator.constraints.Range;
  * Time: 3:16 PM
  */
 public class LeagueDTO {
-    private long leagueId;
+    private Long   leagueId;
     @NotBlank
     private String name;
     @Range(min = 1)
-    private long adminUserId;
+    private Long   adminUserId;
     @Range(min = 2, max = 5)
-    private long capacity;
+    private Long   capacity;
     @NotBlank
     private String inviteCode;
 
-    public long getLeagueId() {
+    public Long getLeagueId() {
         return leagueId;
     }
 
-    public void setLeagueId(long leagueId) {
+    public void setLeagueId(Long leagueId) {
         this.leagueId = leagueId;
     }
 
@@ -37,19 +37,19 @@ public class LeagueDTO {
         this.name = name;
     }
 
-    public long getAdminUserId() {
+    public Long getAdminUserId() {
         return adminUserId;
     }
 
-    public void setAdminUserId(long adminUserId) {
+    public void setAdminUserId(Long adminUserId) {
         this.adminUserId = adminUserId;
     }
 
-    public long getCapacity() {
+    public Long getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(long capacity) {
+    public void setCapacity(Long capacity) {
         this.capacity = capacity;
     }
 

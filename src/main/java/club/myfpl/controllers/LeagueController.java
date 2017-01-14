@@ -3,7 +3,6 @@ package club.myfpl.controllers;
 import club.myfpl.controllers.dto.LeagueDTO;
 import club.myfpl.model.League;
 import club.myfpl.services.LeagueService;
-import club.myfpl.validation.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,12 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("leagues")
 public class LeagueController {
 
-    private final ValidationService validationService;
     private final LeagueService leagueService;
 
     @Autowired
-    public LeagueController(ValidationService validationService, LeagueService leagueService) {
-        this.validationService = validationService;
+    public LeagueController(LeagueService leagueService) {
         this.leagueService = leagueService;
     }
 
@@ -40,7 +37,6 @@ public class LeagueController {
 
     @PostMapping({"create", "update"})
     public ResponseEntity createorUpdateLeague(@RequestBody LeagueDTO leagueDTO) {
-        validationService.validate(leagueDTO);
         League league = leagueService.createOrUpdateLeague(leagueDTO.toLeague());
         return ResponseEntity.ok(league.getLeagueId());
     }

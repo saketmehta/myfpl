@@ -10,13 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Team {
-    public static final String TEAM_ID_KEY = "teamId";
-    public static final String NAME_KEY = "name";
+    public static final String TEAM_ID_KEY    = "teamId";
+    public static final String NAME_KEY       = "name";
     public static final String SHORT_NAME_KEY = "shortName";
 
     private String id;
     @Indexed(unique = true)
-    private long teamId;
+    private long   teamId;
     private String name;
     private String shortName;
 
