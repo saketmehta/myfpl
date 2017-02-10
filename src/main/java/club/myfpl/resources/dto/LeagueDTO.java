@@ -1,4 +1,4 @@
-package club.myfpl.controllers.dto;
+package club.myfpl.resources.dto;
 
 import club.myfpl.model.League;
 import com.google.common.collect.Sets;

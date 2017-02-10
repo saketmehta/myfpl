@@ -15,4 +15,6 @@ public interface UserService {
     User fetchUser(long userId);
 
     User fetchUserByEmail(String email);
+
+    User authenticate(String email, String password);
 }

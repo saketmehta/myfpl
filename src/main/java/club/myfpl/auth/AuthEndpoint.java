@@ -2,12 +2,15 @@ package club.myfpl.auth;
 
 import club.myfpl.model.User;
 import club.myfpl.services.UserService;
-import club.myfpl.utils.SessionUtils;
+import club.myfpl.utils.SessionConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
@@ -18,7 +21,7 @@ import java.util.Optional;
  * Time: 2:47 PM
  */
 @Component
-@Path("/login")
+@Path("/auth")
 public class AuthEndpoint {
     private final UserService userService;
 
@@ -29,24 +32,54 @@ public class AuthEndpoint {
 
     @POST
     @Produces("application/json")
-    @Consumes("application/x-www-form-urlencoded")
-    public Response authenticate(@FormParam("username") String username, @FormParam("password") String password, @Context HttpServletRequest request) {
-        Optional<User> user = doAuthenticate(username, password);
+    @Consumes("application/json")
+    @Path("/login")
+    public Response authenticate(UserCredentials credentials, @Context HttpServletRequest request) {
+        Optional<User> user = doAuthenticate(credentials);
         if (user.isPresent()) {
+            User userToSend = user.get();
             request.getSession().invalidate();
-            SessionUtils.setUser(request, user.get());
-            return Response.ok().build();
+            request.getSession(true).setAttribute(SessionConstants.USER, userToSend);
+            return Response.ok(userToSend).build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
-    private Optional<User> doAuthenticate(String email, String password) {
-        User user = userService.fetchUserByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
+    @POST
+    @Path("/logout")
+    public Response logout(@Context HttpServletRequest request) {
+        request.getSession().invalidate();
+        return Response.ok().build();
+    }
+
+    private Optional<User> doAuthenticate(UserCredentials credentials) {
+        User user = userService.authenticate(credentials.getEmail(), credentials.getPassword());
+        if (user != null) {
             return Optional.of(user);
         } else {
             return Optional.empty();
+        }
+    }
+
+    static class UserCredentials {
+        private String email;
+        private String password;
+
+        String getEmail() {
+            return email;
+        }
+
+        void setEmail(String email) {
+            this.email = email;
+        }
+
+        String getPassword() {
+            return password;
+        }
+
+        void setPassword(String password) {
+            this.password = password;
         }
     }
 }

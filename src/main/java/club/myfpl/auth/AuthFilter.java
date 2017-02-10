@@ -1,5 +1,7 @@
 package club.myfpl.auth;
 
+import club.myfpl.utils.SessionConstants;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +24,12 @@ public class AuthFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         // allow if this request is for login endpoint
-        if (req.getRequestURI().equals("/rest/login")) {
+        if (req.getRequestURI().startsWith("/rest/auth")) {
             chain.doFilter(request, response);
             return;
         }
 
-        if (req.getSession().getAttribute("user") == null) {
+        if (req.getSession().getAttribute(SessionConstants.USER) == null) {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Please login.");
         } else {
             chain.doFilter(request, response);

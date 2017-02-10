@@ -1,6 +1,6 @@
 package club.myfpl.controllers;
 
-import club.myfpl.controllers.dto.LeagueDTO;
+import club.myfpl.resources.dto.LeagueDTO;
 import club.myfpl.model.League;
 import club.myfpl.services.LeagueService;
 import org.springframework.beans.factory.annotation.Autowired;

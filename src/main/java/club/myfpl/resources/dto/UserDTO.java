@@ -1,4 +1,4 @@
-package club.myfpl.controllers.dto;
+package club.myfpl.resources.dto;
 
 import club.myfpl.model.User;
 import org.apache.commons.lang3.StringUtils;

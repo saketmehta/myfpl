@@ -53,12 +53,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User fetchUser(long userId) {
-        return userDAO.findUser(userId);
+        User user = userDAO.findUser(userId);
+        user.setPassword(null);
+        return user;
     }
 
     @Override
     public User fetchUserByEmail(String email) {
-        return userDAO.findUserByEmail(email);
+        User userByEmail = userDAO.findUserByEmail(email);
+        userByEmail.setPassword(null);
+        return userByEmail;
+    }
+
+    @Override
+    public User authenticate(String email, String password) {
+        User userByEmail = userDAO.findUserByEmail(email);
+        if (userByEmail.getPassword().equals(password)) {
+            userByEmail.setPassword(null);
+            return userByEmail;
+        }
+        return null;
     }
 
     private boolean isEmailAlreadyInUse(String email) {

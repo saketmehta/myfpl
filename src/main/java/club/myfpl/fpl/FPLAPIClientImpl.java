@@ -46,7 +46,7 @@ public class FPLAPIClientImpl implements FPLAPIClient {
             }
             return JsonUtils.fromJson(buffer.toString(), responseClass);
         } catch (IOException e) {
-            throw new RuntimeException("Error occured while request at URL: " + absoluteURL, e);
+            throw new RuntimeException("Error occurred while request at URL: " + absoluteURL, e);
         }
     }
 
