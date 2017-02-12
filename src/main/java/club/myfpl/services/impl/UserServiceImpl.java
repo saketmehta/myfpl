@@ -4,6 +4,7 @@ import club.myfpl.daos.UserDAO;
 import club.myfpl.exceptions.EmailAlreadyInUseException;
 import club.myfpl.exceptions.UserNotFoundException;
 import club.myfpl.model.User;
+import club.myfpl.resources.dto.CreateUserDTO;
 import club.myfpl.resources.dto.UpdateUserDTO;
 import club.myfpl.services.SequenceNumberService;
 import club.myfpl.services.UserService;
@@ -27,11 +28,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        if (isEmailAlreadyInUse(user.getEmail())) {
-            throw new RuntimeException("That email is already in use!");
+    public User createUser(CreateUserDTO createUserDTO) {
+        if (isEmailAlreadyInUse(createUserDTO.getEmail())) {
+            throw new EmailAlreadyInUseException();
         }
+        User user = new User();
         user.setUserId(sequenceNumberService.nextSequenceNumber(User.class));
+        user.setFullName(createUserDTO.getFullName());
+        user.setEmail(createUserDTO.getEmail());
+        user.setPassword(createUserDTO.getPassword());
         userDAO.createUser(user);
         return user;
     }

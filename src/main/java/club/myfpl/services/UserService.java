@@ -1,6 +1,7 @@
 package club.myfpl.services;
 
 import club.myfpl.model.User;
+import club.myfpl.resources.dto.CreateUserDTO;
 import club.myfpl.resources.dto.UpdateUserDTO;
 
 /**
@@ -9,7 +10,7 @@ import club.myfpl.resources.dto.UpdateUserDTO;
  * Time: 5:03 PM
  */
 public interface UserService {
-    User createUser(User user);
+    User createUser(CreateUserDTO createUserDTO);
 
     User updateUser(UpdateUserDTO updateUserDTO);
 

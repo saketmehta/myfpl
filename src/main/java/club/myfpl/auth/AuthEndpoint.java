@@ -1,6 +1,7 @@
 package club.myfpl.auth;
 
 import club.myfpl.model.User;
+import club.myfpl.resources.dto.CreateUserDTO;
 import club.myfpl.services.UserService;
 import club.myfpl.utils.SessionConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,15 @@ public class AuthEndpoint {
     @Autowired
     public AuthEndpoint(UserService userService) {
         this.userService = userService;
+    }
+
+    @POST
+    @Path("create")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response createUser(CreateUserDTO createUserDTO) {
+        userService.createUser(createUserDTO);
+        return Response.ok(createUserDTO).build();
     }
 
     @POST
