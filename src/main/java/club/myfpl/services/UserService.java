@@ -1,6 +1,7 @@
 package club.myfpl.services;
 
 import club.myfpl.model.User;
+import club.myfpl.resources.dto.UpdateUserDTO;
 
 /**
  * User: Saket
@@ -10,11 +11,13 @@ import club.myfpl.model.User;
 public interface UserService {
     User createUser(User user);
 
-    User updateUser(long userId, User user);
+    User updateUser(UpdateUserDTO updateUserDTO);
 
     User fetchUser(long userId);
 
     User fetchUserByEmail(String email);
 
     User authenticate(String email, String password);
+
+    boolean updatePassword(long userId, String oldPassword, String newPassword);
 }

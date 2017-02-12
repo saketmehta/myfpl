@@ -1,15 +1,12 @@
 package club.myfpl.resources;
 
-import club.myfpl.resources.dto.UserDTO;
 import club.myfpl.model.User;
+import club.myfpl.resources.dto.UpdateUserDTO;
 import club.myfpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
@@ -28,22 +25,58 @@ public class UserResource {
     }
 
     @POST
-    @Path("create")
-    public Response createUser(UserDTO userDTO) {
-        User user = userService.createUser(userDTO.toUser());
-        return Response.ok(user.getUserId()).build();
+    @Path("update")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateUser(UpdateUserDTO updateUserDTO) {
+        User user = userService.updateUser(updateUserDTO);
+        return Response.ok(user).build();
     }
 
     @POST
-    @Path("update/{userId}")
-    public Response updateUser(@PathParam("userId") long userId, UserDTO userDTO) {
-        User user = userService.updateUser(userId, userDTO.toUser());
-        return Response.ok(user.getUserId()).build();
+    @Path("change-password")
+    public Response changePassword(UserCredentialsDTO userCredentialsDTO) {
+        boolean updated = userService.updatePassword(userCredentialsDTO.userId, userCredentialsDTO.oldPassword, userCredentialsDTO.newPassword);
+        if (updated) {
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(false).build();
+        }
     }
 
     @GET
     @Path("fetch/{userId}")
     public Response fetchUser(@PathParam("userId") long userId) {
         return Response.ok(userService.fetchUser(userId)).build();
+    }
+
+    private static class UserCredentialsDTO {
+        private Long   userId;
+        private String oldPassword;
+        private String newPassword;
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Long userId) {
+            this.userId = userId;
+        }
+
+        public String getOldPassword() {
+            return oldPassword;
+        }
+
+        public void setOldPassword(String oldPassword) {
+            this.oldPassword = oldPassword;
+        }
+
+        public String getNewPassword() {
+            return newPassword;
+        }
+
+        public void setNewPassword(String newPassword) {
+            this.newPassword = newPassword;
+        }
     }
 }

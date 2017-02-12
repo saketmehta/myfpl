@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,20 +19,30 @@ import java.net.URL;
  * Time: 4:48 PM
  */
 @Component
-@Path("bootstrap")
+@Path("fpl")
 @Produces("application/json")
-public class BootstrapResource {
+public class FPLProxyResource {
 
     @GET
-    @Path("static")
+    @Path("bootstrap/static")
     public Response getBootstrapStaticData() {
         return Response.ok(doAPICall(FPLConstants.BOOTSTRAP_STATIC_ENDPOINT)).build();
     }
 
     @GET
-    @Path("dynamic")
+    @Path("bootstrap/dynamic")
     public Response getBootstrapDynamicData() {
         return Response.ok(doAPICall(FPLConstants.BOOTSTRAP_DYNAMIC_ENDPOINT)).build();
+    }
+
+    @GET
+    @Path("fixtures")
+    public Response getFixturesData(@QueryParam("event") Integer event) {
+        if (event == null) {
+            return Response.ok(doAPICall(FPLConstants.FIXTURES_ENDPOINT)).build();
+        } else {
+            return Response.ok(doAPICall(FPLConstants.FIXTURES_ENDPOINT + "?event=" + event)).build();
+        }
     }
 
     private String doAPICall(String relativePath) {

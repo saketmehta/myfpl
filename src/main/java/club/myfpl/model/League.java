@@ -18,25 +18,17 @@ public class League {
 
     private String          id;
     @Indexed(unique = true)
-    private long            leagueId;
+    private Long            leagueId;
     private String          name;
-    private long            adminUserId;
-    private long            capacity;
+    private Long            adminUserId;
+    private Long            capacity;
     private Set<Long>       users;
-    private boolean         isLocked;
-    private long            transferTurnUserId;
-    private long            firstTransferUserId;
+    private Boolean         isLocked;
+    private Long            transferTurnUserId;
+    private Long            firstTransferUserId;
     private Map<Long, Long> transferOrder;
     @Indexed(unique = true)
     private String          inviteCode;
-
-    public boolean isLocked() {
-        return isLocked;
-    }
-
-    public void setLocked(boolean locked) {
-        isLocked = locked;
-    }
 
     public String getId() {
         return id;
@@ -46,11 +38,11 @@ public class League {
         this.id = id;
     }
 
-    public long getLeagueId() {
+    public Long getLeagueId() {
         return leagueId;
     }
 
-    public void setLeagueId(long leagueId) {
+    public void setLeagueId(Long leagueId) {
         this.leagueId = leagueId;
     }
 
@@ -62,19 +54,19 @@ public class League {
         this.name = name;
     }
 
-    public long getAdminUserId() {
+    public Long getAdminUserId() {
         return adminUserId;
     }
 
-    public void setAdminUserId(long adminUserId) {
+    public void setAdminUserId(Long adminUserId) {
         this.adminUserId = adminUserId;
     }
 
-    public long getCapacity() {
+    public Long getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(long capacity) {
+    public void setCapacity(Long capacity) {
         this.capacity = capacity;
     }
 
@@ -86,19 +78,27 @@ public class League {
         this.users = users;
     }
 
-    public long getTransferTurnUserId() {
+    public Boolean getLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(Boolean locked) {
+        isLocked = locked;
+    }
+
+    public Long getTransferTurnUserId() {
         return transferTurnUserId;
     }
 
-    public void setTransferTurnUserId(long transferTurnUserId) {
+    public void setTransferTurnUserId(Long transferTurnUserId) {
         this.transferTurnUserId = transferTurnUserId;
     }
 
-    public long getFirstTransferUserId() {
+    public Long getFirstTransferUserId() {
         return firstTransferUserId;
     }
 
-    public void setFirstTransferUserId(long firstTransferUserId) {
+    public void setFirstTransferUserId(Long firstTransferUserId) {
         this.firstTransferUserId = firstTransferUserId;
     }
 

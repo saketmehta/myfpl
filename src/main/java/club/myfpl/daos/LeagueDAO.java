@@ -8,15 +8,15 @@ import java.util.List;
  * @author Saket on 15/09/16.
  */
 public interface LeagueDAO {
+    League findLeague(long leagueId);
+
+    List<League> findLeaguesForUser(long userId);
+
     void createLeague(League league);
 
     void updateLeague(League league);
 
-    League findLeague(long leagueId);
-
     List<League> findLeaguesForAdmin(long adminUserId);
-
-    List<League> findLeaguesForUser(long userId);
 
     League findLeagueByInviteCode(String inviteCode);
 }

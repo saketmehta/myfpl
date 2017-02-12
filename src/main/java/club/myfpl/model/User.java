@@ -18,7 +18,7 @@ public class User {
     public static final String ROLES_KEY     = "roles";
 
     private String       id;
-    private long         userId;
+    private Long         userId;
     @Indexed(unique = true)
     private String       email;
     private String       password;
@@ -33,11 +33,11 @@ public class User {
         this.id = id;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

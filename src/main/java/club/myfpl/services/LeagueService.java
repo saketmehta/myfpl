@@ -10,11 +10,11 @@ import java.util.List;
  * Time: 3:14 PM
  */
 public interface LeagueService {
-    League createOrUpdateLeague(League league);
-
     League fetchLeague(long leagueId);
 
     List<League> fetchLeaguesForUser(long userId);
+
+    League createOrUpdateLeague(League league);
 
     boolean addUserToLeague(String inviteCode, long userId);
 

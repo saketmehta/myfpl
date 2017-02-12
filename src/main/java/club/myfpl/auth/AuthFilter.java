@@ -1,11 +1,13 @@
 package club.myfpl.auth;
 
 import club.myfpl.utils.SessionConstants;
+import com.google.common.collect.Sets;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * User: Saket
@@ -13,6 +15,8 @@ import java.io.IOException;
  * Time: 12:34 PM
  */
 public class AuthFilter implements Filter {
+
+    private final Set<String> allowedUrls = Sets.newHashSet("/rest/auth", "/rest/fpl");
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -23,8 +27,8 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        // allow if this request is for login endpoint
-        if (req.getRequestURI().startsWith("/rest/auth")) {
+        // allow if this request is in allowedUrls
+        if (isAllowedToBypass(req.getRequestURI())) {
             chain.doFilter(request, response);
             return;
         }
@@ -34,6 +38,15 @@ public class AuthFilter implements Filter {
         } else {
             chain.doFilter(request, response);
         }
+    }
+
+    private boolean isAllowedToBypass(String requestURI) {
+        for (String uri : allowedUrls) {
+            if (requestURI.startsWith(uri)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

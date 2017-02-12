@@ -26,6 +26,16 @@ public class LeagueDAOImpl implements LeagueDAO {
     }
 
     @Override
+    public League findLeague(long leagueId) {
+        return mongoTemplate.findOne(Query.query(Criteria.where(League.LEAGUE_ID_KEY).is(leagueId)), League.class);
+    }
+
+    @Override
+    public List<League> findLeaguesForUser(long userId) {
+        return mongoTemplate.find(Query.query(Criteria.where(League.USERS_KEY).in(userId)), League.class);
+    }
+
+    @Override
     public void createLeague(League league) {
         mongoTemplate.insert(league);
     }
@@ -36,18 +46,8 @@ public class LeagueDAOImpl implements LeagueDAO {
     }
 
     @Override
-    public League findLeague(long leagueId) {
-        return mongoTemplate.findOne(Query.query(Criteria.where(League.LEAGUE_ID_KEY).is(leagueId)), League.class);
-    }
-
-    @Override
     public List<League> findLeaguesForAdmin(long adminUserId) {
         return mongoTemplate.find(Query.query(Criteria.where(League.ADMIN_USER_ID_KEY).is(adminUserId)), League.class);
-    }
-
-    @Override
-    public List<League> findLeaguesForUser(long userId) {
-        return mongoTemplate.find(Query.query(Criteria.where(League.USERS_KEY).in(userId)), League.class);
     }
 
     @Override

@@ -34,6 +34,16 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
+    public League fetchLeague(long leagueId) {
+        return leagueDAO.findLeague(leagueId);
+    }
+
+    @Override
+    public List<League> fetchLeaguesForUser(long userId) {
+        return leagueDAO.findLeaguesForUser(userId);
+    }
+
+    @Override
     public League createOrUpdateLeague(League league) {
         if (league.getLeagueId() > 0) {
             return updateLeague(league);
@@ -69,14 +79,9 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public League fetchLeague(long leagueId) {
-        return leagueDAO.findLeague(leagueId);
-    }
-
-    @Override
     public boolean addUserToLeague(String inviteCode, long userId) {
         League league = leagueDAO.findLeagueByInviteCode(inviteCode);
-        if (league.isLocked()) {
+        if (league.getLocked()) {
             return false;
         }
         if (league.getCapacity() == league.getUsers().size()) {
@@ -93,7 +98,7 @@ public class LeagueServiceImpl implements LeagueService {
     @Override
     public boolean removeUserFromLeague(long leagueId, long userId) {
         League league = leagueDAO.findLeague(leagueId);
-        if (league.isLocked()) {
+        if (league.getLocked()) {
             return false;
         }
         if (league.getUsers().size() <= 1) {
@@ -132,11 +137,6 @@ public class LeagueServiceImpl implements LeagueService {
         league.setLocked(false);
         leagueDAO.updateLeague(league);
         return true;
-    }
-
-    @Override
-    public List<League> fetchLeaguesForUser(long userId) {
-        return leagueDAO.findLeaguesForUser(userId);
     }
 
     private boolean isLeagueNameAvailable(League league) {

@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 
 @ServletComponentScan
 @SpringBootApplication
-public class MyfplApplication {
+public class MyFPL {
 
     public static void main(String[] args) {
-        SpringApplication.run(MyfplApplication.class, args);
+        SpringApplication.run(MyFPL.class, args);
     }
 
     @Bean
