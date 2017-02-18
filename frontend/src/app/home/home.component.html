@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+  <caption>Gamesweek {{eventNumber}}</caption>
+  <tbody>
+    <tr *ngFor="let fixture of fixtures">
+      <td class="col-md-4">{{ getTeam(fixture.team_h).name }}</td>
+      <td class="col-md-1"><span class="badge-25" [ngClass]="getTeam(fixture.team_h).short_name"></span></td>
+      <td class="col-md-2">{{ fixture.kickoff_time_formatted }}</td>
+      <td class="col-md-1"><span class="badge-25" [ngClass]="getTeam(fixture.team_a).short_name"></span></td>
+      <td class="col-md-4">{{ getTeam(fixture.team_a).name }}</td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-default" (click)="previousFixtures()">Previous</button>
+<button type="button" class="btn btn-default" (click)="nextFixtures()">Next</button>

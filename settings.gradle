@@ -1,0 +1,3 @@
+rootProject.name = 'myfpl'
+include 'frontend'
+include 'backend'

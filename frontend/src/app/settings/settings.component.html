@@ -1,0 +1,28 @@
+<h1>Profile</h1>
+<form (ngSubmit)="updateProfile()">
+  <div class="form-group">
+    <label for="inputFullName">Full Name</label>
+    <input type="text" class="form-control" id="inputFullName" placeholder="Aldous Snow" name="fullname" [(ngModel)]="updateUserModel.fullName">
+  </div>
+  <div class="form-group">
+    <label for="inputEmail">Email</label>
+    <input type="email" class="form-control" id="inputEmail" placeholder="rockstar@myfpl.club" name="email" [(ngModel)]="updateUserModel.email">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<h1>Change Password</h1>
+<form (ngSubmit)="updatePassword()">
+  <div class="form-group">
+    <label for="oldPassword">Old password</label>
+    <input type="password" class="form-control" id="oldPassword" required name="oldPassword" [(ngModel)]="changePasswordModel.oldPassword">
+  </div>
+  <div class="form-group">
+    <label for="newPassword">New password</label>
+    <input type="password" class="form-control" id="newPassword" required name="newPassword" [(ngModel)]="changePasswordModel.newPassword">
+  </div>
+  <div class="form-group">
+    <label for="newPasswordAgain">Confirm new password</label>
+    <input type="password" class="form-control" id="newPasswordAgain" required name="newPasswordAgain" [(ngModel)]="changePasswordModel.newPasswordAgain">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

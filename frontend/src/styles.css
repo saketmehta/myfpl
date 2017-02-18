@@ -1,0 +1,238 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.badge-25 {
+  background-image: url('assets/badges-25-sprite.png');
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  display: block;
+  background-position: -175px -75px
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .badge-25 {
+    background-image: url('assets/badges-25-sprite.png');
+    background-size: 200px 175px
+  }
+}
+
+.badge-25.ARS {
+  background-position: -25px 0
+}
+
+.badge-25.AVL {
+  background-position: -125px -25px
+}
+
+.badge-25.BAR {
+  background-position: 0 -25px
+}
+
+.badge-25.BHA {
+  background-position: -25px -25px
+}
+
+.badge-25.BIR {
+  background-position: -50px 0
+}
+
+.badge-25.BLB {
+  background-position: -50px -25px
+}
+
+.badge-25.BLP {
+  background-position: 0 -50px
+}
+
+.badge-25.BOL {
+  background-position: -25px -50px
+}
+
+.badge-25.BOU {
+  background-position: -50px -50px
+}
+
+.badge-25.BRD {
+  background-position: -75px 0
+}
+
+.badge-25.BRE {
+  background-position: -75px -25px
+}
+
+.badge-25.BRI {
+  background-position: -75px -50px
+}
+
+.badge-25.BRN {
+  background-position: 0 -75px
+}
+
+.badge-25.BUR {
+  background-position: 0 -75px
+}
+
+.badge-25.CAR {
+  background-position: -25px -75px
+}
+
+.badge-25.CHA {
+  background-position: -50px -75px
+}
+
+.badge-25.CHE {
+  background-position: -75px -75px
+}
+
+.badge-25.COV {
+  background-position: -100px 0
+}
+
+.badge-25.CRY {
+  background-position: -100px -25px
+}
+
+.badge-25.DER-new {
+  background-position: -100px -50px
+}
+
+.badge-25.DER {
+  background-position: -100px -75px
+}
+
+.badge-25.EVE {
+  background-position: 0 -100px
+}
+
+.badge-25.FUL {
+  background-position: -25px -100px
+}
+
+.badge-25.HUL {
+  background-position: -50px -100px
+}
+
+.badge-25.IPS {
+  background-position: -75px -100px
+}
+
+.badge-25.LEE {
+  background-position: -100px -100px
+}
+
+.badge-25.LEI {
+  background-position: -125px 0
+}
+
+.badge-25.LIV {
+  background-position: 0 0
+}
+
+.badge-25.MCI {
+  background-position: -125px -50px
+}
+
+.badge-25.MID {
+  background-position: -125px -75px
+}
+
+.badge-25.MKD {
+  background-position: -125px -100px
+}
+
+.badge-25.MUN {
+  background-position: 0 -125px
+}
+
+.badge-25.NEW {
+  background-position: -25px -125px
+}
+
+.badge-25.NFO {
+  background-position: -50px -125px
+}
+
+.badge-25.NOR {
+  background-position: -75px -125px
+}
+
+.badge-25.OLD {
+  background-position: -100px -125px
+}
+
+.badge-25.POR {
+  background-position: -125px -125px
+}
+
+.badge-25.QPR {
+  background-position: -150px 0
+}
+
+.badge-25.RDG {
+  background-position: -150px -25px
+}
+
+.badge-25.SHU {
+  background-position: -150px -50px
+}
+
+.badge-25.SHW {
+  background-position: -150px -75px
+}
+
+.badge-25.SOU {
+  background-position: -150px -100px
+}
+
+.badge-25.STK {
+  background-position: -150px -125px
+}
+
+.badge-25.SUN {
+  background-position: 0 -150px
+}
+
+.badge-25.SWA {
+  background-position: -25px -150px
+}
+
+.badge-25.SWI {
+  background-position: -50px -150px
+}
+
+.badge-25.TOT {
+  background-position: -75px -150px
+}
+
+.badge-25.WAT {
+  background-position: -100px -150px
+}
+
+.badge-25.WBA {
+  background-position: -125px -150px
+}
+
+.badge-25.WHU {
+  background-position: -150px -150px
+}
+
+.badge-25.WIG {
+  background-position: -175px 0
+}
+
+.badge-25.WIM {
+  background-position: -175px -25px
+}
+
+.badge-25.WOL {
+  background-position: -175px -50px
+}
+
+.badge-25.default {
+  background-position: -175px -75px
+}

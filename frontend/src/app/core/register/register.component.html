@@ -1,0 +1,20 @@
+<h1>Fill in the following</h1>
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="inputFullName">Full Name</label>
+    <input type="text" class="form-control" id="inputFullName" placeholder="Aldous Snow" name="fullname" [(ngModel)]="userModel.fullName">
+  </div>
+  <div class="form-group">
+    <label for="inputEmail">Email</label>
+    <input type="email" class="form-control" id="inputEmail" placeholder="rockstar@myfpl.club" name="email" [(ngModel)]="userModel.email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" required name="password" [(ngModel)]="userModel.password">
+  </div>
+  <div class="form-group">
+    <label for="passwordAgain">Confirm password</label>
+    <input type="password" class="form-control" id="passwordAgain" required name="passwordAgain" [(ngModel)]="userModel.passwordAgain">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
