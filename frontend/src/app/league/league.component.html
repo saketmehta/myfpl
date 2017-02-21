@@ -1,3 +1,10 @@
-<p>
-  league works!
-</p>
+<div>
+  <button class="btn btn-default" role="button" (click)="view = 0">My Leagues</button>
+  <button class="btn btn-success" role="button" (click)="view = 1">Create</button>
+  <button class="btn btn-primary" role="button" (click)="view = 2">Join</button>
+</div>
+<div>
+  <app-my-leagues *ngIf="view === 0"></app-my-leagues>
+  <app-create-league *ngIf="view === 1" (onCreate)="onViewChange($event)"></app-create-league>
+  <app-join-league *ngIf="view === 2" (onJoin)="onViewChange($event)"></app-join-league>
+</div>

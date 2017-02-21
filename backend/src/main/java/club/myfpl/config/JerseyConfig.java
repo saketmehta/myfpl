@@ -2,6 +2,7 @@ package club.myfpl.config;
 
 import club.myfpl.auth.AuthEndpoint;
 import club.myfpl.resources.FPLProxyResource;
+import club.myfpl.resources.LeagueResource;
 import club.myfpl.resources.UserResource;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
@@ -28,5 +29,6 @@ public class JerseyConfig extends ResourceConfig {
         register(AuthEndpoint.class);
         register(FPLProxyResource.class);
         register(UserResource.class);
+        register(LeagueResource.class);
     }
 }

@@ -1,7 +1,5 @@
 package club.myfpl.controllers;
 
-import club.myfpl.resources.dto.LeagueDTO;
-import club.myfpl.model.League;
 import club.myfpl.services.LeagueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +31,6 @@ public class LeagueController {
     @GetMapping("fetch/all")
     public ResponseEntity fetchLeagues() {
         return ResponseEntity.ok(leagueService.fetchLeaguesForUser(1000));
-    }
-
-    @PostMapping({"create", "update"})
-    public ResponseEntity createorUpdateLeague(@RequestBody LeagueDTO leagueDTO) {
-        League league = leagueService.createOrUpdateLeague(leagueDTO.toLeague());
-        return ResponseEntity.ok(league.getLeagueId());
     }
 
     @PostMapping("add-user")

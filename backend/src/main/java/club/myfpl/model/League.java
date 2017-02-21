@@ -1,5 +1,6 @@
 package club.myfpl.model;
 
+import com.google.common.collect.Sets;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -119,6 +120,9 @@ public class League {
     }
 
     public void addUser(long userId) {
+        if (users == null) {
+            users = Sets.newHashSet();
+        }
         users.add(userId);
     }
 

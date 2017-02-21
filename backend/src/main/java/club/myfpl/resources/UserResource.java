@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Path("user")
+@Consumes("application/json")
+@Produces("application/json")
 public class UserResource {
     private final UserService userService;
 
@@ -26,8 +28,6 @@ public class UserResource {
 
     @POST
     @Path("update")
-    @Consumes("application/json")
-    @Produces("application/json")
     public Response updateUser(UpdateUserDTO updateUserDTO) {
         User user = userService.updateUser(updateUserDTO);
         return Response.ok(user).build();

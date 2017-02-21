@@ -1,6 +1,6 @@
-import { FixtureService } from './../core/fixture.service';
+import { FixtureService } from './../core/services/fixture.service';
+import { TeamService } from './../core/services/team.service';
 import { Fixture, Team } from './../core/models/fpl';
-import { TeamService } from './../core/team.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(private teamService: TeamService, private fixtureService: FixtureService) { }
 
   ngOnInit() {
-    this.eventNumber = this.fixtureService.getCurrentEventNumber();
+    this.eventNumber = this.fixtureService.getCurrentEventNumber() + 1;
     this.teams = this.teamService.getTeams();
     this.fixtures = this.fixtureService.getNextEvent();
   }

@@ -45,7 +45,7 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public League createOrUpdateLeague(League league) {
-        if (league.getLeagueId() > 0) {
+        if (league.getLeagueId() != null) {
             return updateLeague(league);
         } else {
             return createLeague(league);

@@ -1,7 +1,7 @@
-import { UserService } from './../core/user.service';
+import { AlertService } from './../core/alert/alert.service';
+import { UserService } from './../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../core/models/user';
-import { AlertService } from '../core/alert.service';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +23,7 @@ export class SettingsComponent implements OnInit {
   constructor(private userService: UserService, private alertService: AlertService) { }
 
   ngOnInit() {
-    let user = this.userService.getCurrentUser();
+    let user = <User>JSON.parse(localStorage.getItem('currentUser'));
     this.updateUserModel.userId = user.userId;
     this.updateUserModel.fullName = user.fullName;
     this.updateUserModel.email = user.email;

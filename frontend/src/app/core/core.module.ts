@@ -1,46 +1,48 @@
-import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { AuthService } from './services/auth.service';
+import { FixtureService } from './services/fixture.service';
+import { LeagueService } from './services/league.service';
+import { TeamService } from './services/team.service';
+import { BootstrapService } from './services/bootstrap.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { UserService } from './services/user.service';
+import { AlertModule } from './alert/alert.module';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { SharedModule } from '../shared/shared.module';
-import { LoggerService } from './logger.service';
-import { AlertService } from './alert.service';
-import { UserService } from './user.service';
-import { FixtureService } from './fixture.service';
-import { TeamService } from './team.service';
-import { AuthGuardService } from './auth-guard.service';
-import { BootstrapService } from './bootstrap.service';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { AlertComponent } from './alert/alert.component';
-import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
+    RouterModule,
+    HttpModule,
     SharedModule,
-    RouterModule
+    AlertModule
   ],
   declarations: [
-    NavbarComponent,
-    AlertComponent,
-    LoginFormComponent,
-    RegisterComponent
   ],
   exports: [
-    NavbarComponent,
-    AlertComponent,
-    LoginFormComponent,
-    RegisterComponent
+    AlertComponent
   ],
   providers: [
-    LoggerService,
-    AlertService,
     UserService,
     AuthGuardService,
     BootstrapService,
     TeamService,
-    FixtureService
+    FixtureService,
+    LeagueService,
+    AuthService
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+
+  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      throw new Error(
+        'CoreModule is already loaded. Import it in the AppModule only');
+    }
+  }
+
+}

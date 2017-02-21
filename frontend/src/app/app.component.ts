@@ -1,6 +1,5 @@
+import { BootstrapService } from './core/services/bootstrap.service';
 import { Component, OnInit } from '@angular/core';
-
-import { BootstrapService } from './core/bootstrap.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private bootstrapService: BootstrapService) { }
 
   ngOnInit() {
-    // this.bootstrapService.bootstrap().then(() => this.setSpinner(false));
+    this.bootstrapService.bootstrap().subscribe(() => this.spinner = false);
   }
 
   setSpinner(value: boolean) {

@@ -23,6 +23,8 @@ import java.util.Optional;
  */
 @Component
 @Path("/auth")
+@Produces("application/json")
+@Consumes("application/json")
 public class AuthEndpoint {
     private final UserService userService;
 
@@ -33,16 +35,12 @@ public class AuthEndpoint {
 
     @POST
     @Path("create")
-    @Consumes("application/json")
-    @Produces("application/json")
     public Response createUser(CreateUserDTO createUserDTO) {
         userService.createUser(createUserDTO);
         return Response.ok(createUserDTO).build();
     }
 
     @POST
-    @Produces("application/json")
-    @Consumes("application/json")
     @Path("/login")
     public Response authenticate(UserCredentials credentials, @Context HttpServletRequest request) {
         Optional<User> user = doAuthenticate(credentials);
@@ -72,7 +70,7 @@ public class AuthEndpoint {
         }
     }
 
-    static class UserCredentials {
+    private static class UserCredentials {
         private String email;
         private String password;
 
