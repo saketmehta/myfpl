@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" routerLink="">My FPL</a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active"><a routerLink="home">Home</a></li>
+        <li *ngIf="isSignedIn" routerLinkActive="active"><a routerLink="my-team">My Team</a></li>
+        <li *ngIf="isSignedIn" routerLinkActive="active"><a routerLink="leagues">Leagues</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="!isSignedIn">
+        <form class="navbar-form navbar-right" (ngSubmit)="login(email.value, password.value)">
+          <div class="form-group">
+            <input type="email" placeholder="Email" class="form-control" required #email id="email">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" class="form-control" required #password id="password">
+          </div>
+          <button type="submit" class="btn btn-success">Sign in</button>
+          <a class="btn btn-primary" routerLink="signup" role="button">Register</a>
+        </form>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="isSignedIn">
+        <li routerLinkActive="active"><a routerLink="settings">Settings</a></li>
+        <li><a role="button" (click)="logout()">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

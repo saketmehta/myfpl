@@ -1,0 +1,16 @@
+<h1>Fill in the following</h1>
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="inputLeagueName">League Name</label>
+    <input type="text" class="form-control" id="inputLeagueName" required placeholder="Fire Blasters XI" name="name" [(ngModel)]="leagueModel.name">
+  </div>
+  <div class="form-group">
+    <label for="inputCapacity">Capacity</label>
+    <input type="number" class="form-control" id="inputCapacity" required placeholder="4" name="capacity" [(ngModel)]="leagueModel.capacity">
+  </div>
+  <div class="form-group">
+    <label for="inputInviteCode">Invite Code</label>
+    <input type="text" class="form-control" id="inputInviteCode" required placeholder="ZXCVBN" name="inviteCode" [(ngModel)]="leagueModel.inviteCode">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
