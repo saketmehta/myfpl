@@ -41,7 +41,7 @@ public class AuthEndpoint {
     }
 
     @POST
-    @Path("/login")
+    @Path("login")
     public Response authenticate(UserCredentials credentials, @Context HttpServletRequest request) {
         Optional<User> user = doAuthenticate(credentials);
         if (user.isPresent()) {
@@ -55,7 +55,7 @@ public class AuthEndpoint {
     }
 
     @POST
-    @Path("/logout")
+    @Path("logout")
     public Response logout(@Context HttpServletRequest request) {
         request.getSession().invalidate();
         return Response.ok().build();

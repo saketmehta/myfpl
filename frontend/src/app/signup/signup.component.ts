@@ -1,6 +1,6 @@
+import { AuthService } from './../core/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertService } from './../core/alert/alert.service';
-import { UserService } from './../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,13 +17,13 @@ export class SignupComponent implements OnInit {
     passwordAgain: <string>null
   };
 
-  constructor(private userService: UserService, private alertService: AlertService, private router: Router) { }
+  constructor(private authService: AuthService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    this.userService.createUser(this.userModel)
+    this.authService.createUser(this.userModel)
       .subscribe(user => {
         this.alertService.success('Yay! You can now login.', true);
         this.router.navigate(['/home']);

@@ -31,4 +31,9 @@ export class AuthService {
       });
   }
 
+  createUser(payload: any): Observable<Response> {
+    const url = 'rest/auth/create';
+    return this.http.post(url, payload);
+  }
+
 }

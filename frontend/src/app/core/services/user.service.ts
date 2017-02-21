@@ -27,9 +27,4 @@ export class UserService {
     return this.http.post(url, payload);
   }
 
-  createUser(payload: any): Observable<Response> {
-    const url = `${this.userUrl}/create`;
-    return this.http.post(url, payload);
-  }
-
 }
