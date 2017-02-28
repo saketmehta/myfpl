@@ -3,6 +3,7 @@ package club.myfpl.services;
 import club.myfpl.model.League;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User: Saket
@@ -16,7 +17,7 @@ public interface LeagueService {
 
     League createOrUpdateLeague(League league);
 
-    boolean addUserToLeague(String inviteCode, long userId);
+    Optional<League> addUserToLeague(String inviteCode, long userId);
 
     boolean removeUserFromLeague(long leagueId, long userId);
 

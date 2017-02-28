@@ -1,3 +1,9 @@
-<p>
-  my-leagues works!
-</p>
+<br>
+<table class="table table-bordered">
+  <tbody>
+    <tr *ngFor="let league of myLeagues">
+      <td >{{ league.name }}</td>
+      <td >{{ league.inviteCode }}</td>
+    </tr>
+  </tbody>
+</table>

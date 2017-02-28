@@ -6,14 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./league.component.css']
 })
 export class LeagueComponent implements OnInit {
-  view = 0;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onViewChange(view: number) {
-    this.view = view;
-  }
 }

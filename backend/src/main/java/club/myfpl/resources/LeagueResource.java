@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User: Saket
@@ -51,5 +52,17 @@ public class LeagueResource {
         league.addUser(user.getUserId());
         leagueService.createOrUpdateLeague(league);
         return Response.ok(league).build();
+    }
+
+    @POST
+    @Path("/join")
+    public Response joinLeague(String inviteCode, @Context HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute(SessionConstants.USER);
+        Optional<League> league = leagueService.addUserToLeague(inviteCode, user.getUserId());
+        if (league.isPresent()) {
+            return Response.ok(league.get()).build();
+        } else {
+            return Response.notModified().build();
+        }
     }
 }

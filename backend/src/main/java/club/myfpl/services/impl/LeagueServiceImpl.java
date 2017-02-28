@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -79,20 +80,17 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public boolean addUserToLeague(String inviteCode, long userId) {
+    public Optional<League> addUserToLeague(String inviteCode, long userId) {
         League league = leagueDAO.findLeagueByInviteCode(inviteCode);
         if (league.getLocked()) {
-            return false;
+            return null;
         }
         if (league.getCapacity() == league.getUsers().size()) {
-            return false;
-        }
-        if (userService.fetchUser(userId) == null) {
-            return false;
+            return null;
         }
         league.addUser(userId);
         leagueDAO.updateLeague(league);
-        return true;
+        return Optional.of(league);
     }
 
     @Override

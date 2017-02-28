@@ -1,5 +1,5 @@
-import { AlertService } from './../../core/alert/alert.service';
-import { LeagueService } from './../../core/services/league.service';
+import { AlertService } from '../../core/alert/alert.service';
+import { LeagueService } from '../../core/services/league.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,7 +8,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./create-league.component.css']
 })
 export class CreateLeagueComponent implements OnInit {
-  @Output() onCreate = new EventEmitter<number>();
   leagueModel = {
     name: <string>null,
     capacity: <number>null,
@@ -24,7 +23,6 @@ export class CreateLeagueComponent implements OnInit {
     this.leagueService.create(this.leagueModel)
       .subscribe(league => {
         this.alertService.success('Yay! League created!', true);
-        this.onCreate.emit(0);
       });
   }
 }

@@ -1,3 +1,5 @@
+import { AlertService } from './../../core/alert/alert.service';
+import { LeagueService } from './../../core/services/league.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -6,17 +8,17 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./join-league.component.css']
 })
 export class JoinLeagueComponent implements OnInit {
-  @Output() onJoin = new EventEmitter<number>();
-  joinLeagueModel = {
-    inviteCode: <string>null
-  };
+  inviteCode: string;
 
-  constructor() { }
+  constructor(private leagueService: LeagueService, private alertService: AlertService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    //
+    this.leagueService.join(this.inviteCode)
+      .subscribe(league => {
+        this.alertService.success('Yay! League joined!', true);
+      });
   }
 }
