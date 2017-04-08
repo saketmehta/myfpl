@@ -1,4 +1,4 @@
-# Backend for My FPL - A Spring Boot Project
+# My FPL - A Spring Boot Project
 
 Once there were a group of friends who loved to play the Fantasy Premier League.  So they made Excel sheets and tables each week with the new data and they discussed the transfers to be made via chat groups.
 
