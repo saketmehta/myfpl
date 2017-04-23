@@ -1,6 +1,6 @@
 package club.myfpl.fpl.responses;
 
-import club.myfpl.model.Element;
+import club.myfpl.domain.Player;
 
 /**
  * User: Saket
@@ -8,6 +8,7 @@ import club.myfpl.model.Element;
  * Time: 5:36 PM
  */
 public class ElementResponse {
+
     private long   id;
     private String web_name;
     private String first_name;
@@ -81,16 +82,17 @@ public class ElementResponse {
         this.team = team;
     }
 
-    public Element toElement() {
-        Element element = new Element();
-        element.setElementId(id);
-        element.setWebName(web_name);
-        element.setFirstName(first_name);
-        element.setSecondName(second_name);
-        element.setEventPoints(event_points);
-        element.setTotalPoints(total_points);
-        element.setElementType(element_type);
-        element.setTeam(team);
-        return element;
+    public Player toPlayer() {
+        Player player = new Player();
+        player.setId(id);
+        player.setWebName(web_name);
+        player.setFirstName(first_name);
+        player.setSecondName(second_name);
+        player.setEventPoints(event_points);
+        player.setTotalPoints(total_points);
+        player.setElementType(element_type);
+        player.setClubId(team);
+        return player;
     }
+
 }

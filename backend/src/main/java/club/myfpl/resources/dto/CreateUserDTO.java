@@ -6,6 +6,7 @@ package club.myfpl.resources.dto;
  * Time: 6:00 PM
  */
 public class CreateUserDTO {
+
     private String fullName;
     private String email;
     private String password;
@@ -33,4 +34,5 @@ public class CreateUserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

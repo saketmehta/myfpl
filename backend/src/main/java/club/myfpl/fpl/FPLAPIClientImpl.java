@@ -34,7 +34,6 @@ public class FPLAPIClientImpl implements FPLAPIClient {
 
     private <T> T doAPICall(String relativePath, Class<T> responseClass) {
         String absoluteURL = FPLConstants.BASE_URL + relativePath;
-        T response;
         try {
             URL url = new URL(absoluteURL);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));

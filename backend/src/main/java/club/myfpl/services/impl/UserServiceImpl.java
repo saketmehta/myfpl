@@ -1,12 +1,12 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.daos.UserDAO;
 import club.myfpl.exceptions.EmailAlreadyInUseException;
 import club.myfpl.exceptions.UserNotFoundException;
-import club.myfpl.model.User;
+import club.myfpl.domain.User;
+import club.myfpl.repositories.UserRepository;
 import club.myfpl.resources.dto.CreateUserDTO;
 import club.myfpl.resources.dto.UpdateUserDTO;
-import club.myfpl.services.SequenceNumberService;
+import club.myfpl.resources.dto.UserCredentialsDTO;
 import club.myfpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,82 +18,58 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserDAO               userDAO;
-    private final SequenceNumberService sequenceNumberService;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO, SequenceNumberService sequenceNumberService) {
-        this.userDAO = userDAO;
-        this.sequenceNumberService = sequenceNumberService;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public User createUser(CreateUserDTO createUserDTO) {
+    public User createUser(CreateUserDTO createUserDTO) throws EmailAlreadyInUseException {
         if (isEmailAlreadyInUse(createUserDTO.getEmail())) {
-            throw new EmailAlreadyInUseException();
+            throw new EmailAlreadyInUseException(createUserDTO.getEmail());
         }
         User user = new User();
-        user.setUserId(sequenceNumberService.nextSequenceNumber(User.class));
         user.setFullName(createUserDTO.getFullName());
         user.setEmail(createUserDTO.getEmail());
         user.setPassword(createUserDTO.getPassword());
-        userDAO.createUser(user);
-        return user;
+        return userRepository.insert(user);
     }
 
     @Override
-    public User updateUser(UpdateUserDTO updateUserDTO) {
-        User oldUser = userDAO.findUser(updateUserDTO.getUserId());
+    public User updateUser(UpdateUserDTO updateUserDTO) throws EmailAlreadyInUseException, UserNotFoundException {
+        User oldUser = userRepository.findOne(updateUserDTO.getId());
         if (oldUser == null) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(updateUserDTO.getId());
         }
         if (!oldUser.getEmail().equals(updateUserDTO.getEmail()) && isEmailAlreadyInUse(updateUserDTO.getEmail())) {
-            throw new EmailAlreadyInUseException();
+            throw new EmailAlreadyInUseException(updateUserDTO.getEmail());
         }
         oldUser.setEmail(updateUserDTO.getEmail());
         oldUser.setFullName(updateUserDTO.getFullName());
-        userDAO.updateUser(oldUser);
-        oldUser.setPassword(null);
-        return oldUser;
+        return userRepository.save(oldUser);
     }
 
     @Override
-    public User fetchUser(long userId) {
-        User user = userDAO.findUser(userId);
-        user.setPassword(null);
-        return user;
-    }
-
-    @Override
-    public User fetchUserByEmail(String email) {
-        User userByEmail = userDAO.findUserByEmail(email);
-        userByEmail.setPassword(null);
-        return userByEmail;
-    }
-
-    @Override
-    public User authenticate(String email, String password) {
-        User userByEmail = userDAO.findUserByEmail(email);
-        if (userByEmail.getPassword().equals(password)) {
-            userByEmail.setPassword(null);
-            return userByEmail;
-        }
-        return null;
-    }
-
-    @Override
-    public boolean updatePassword(long userId, String oldPassword, String newPassword) {
-        User user = userDAO.findUser(userId);
-        if (user.getPassword().equals(oldPassword)) {
-            user.setPassword(newPassword);
-            userDAO.updateUser(user);
+    public boolean updatePassword(UserCredentialsDTO userCredentialsDTO) {
+        User user = userRepository.findOne(userCredentialsDTO.getId());
+        if (user.getPassword().equals(userCredentialsDTO.getOldPassword())) {
+            user.setPassword(userCredentialsDTO.getNewPassword());
+            userRepository.save(user);
             return true;
         }
         return false;
     }
 
+    @Override
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
     private boolean isEmailAlreadyInUse(String email) {
-        User user = userDAO.findUserByEmail(email);
+        User user = userRepository.findByEmail(email);
         return user != null;
     }
 }

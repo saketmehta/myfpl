@@ -6,16 +6,17 @@ package club.myfpl.resources.dto;
  * Time: 3:47 PM
  */
 public class UpdateUserDTO {
-    private Long   userId;
+
+    private String id;
     private String email;
     private String fullName;
 
-    public Long getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -33,4 +34,5 @@ public class UpdateUserDTO {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
 }

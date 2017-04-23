@@ -12,6 +12,7 @@ import java.io.Reader;
  * Time: 9:02 PM
  */
 public class JsonUtils {
+
     private static final Gson GSON = new Gson();
 
     public static <T> T fromJson(String data, Class<T> clazz) {
@@ -30,4 +31,5 @@ public class JsonUtils {
     public static String toJson(Object data) {
         return GSON.toJson(data);
     }
+
 }

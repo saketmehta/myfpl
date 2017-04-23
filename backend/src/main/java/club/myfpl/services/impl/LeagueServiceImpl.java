@@ -1,10 +1,11 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.daos.LeagueDAO;
-import club.myfpl.model.League;
+import club.myfpl.domain.League;
+import club.myfpl.exceptions.*;
+import club.myfpl.repositories.LeagueRepository;
+import club.myfpl.resources.dto.CreateLeagueDTO;
+import club.myfpl.resources.dto.UpdateLeagueDTO;
 import club.myfpl.services.LeagueService;
-import club.myfpl.services.SequenceNumberService;
-import club.myfpl.services.UserService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -23,127 +23,104 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class LeagueServiceImpl implements LeagueService {
 
-    private final LeagueDAO             leagueDAO;
-    private final UserService           userService;
-    private final SequenceNumberService sequenceNumberService;
+    private final LeagueRepository leagueRepository;
 
     @Autowired
-    public LeagueServiceImpl(LeagueDAO leagueDAO, UserService userService, SequenceNumberService sequenceNumberService) {
-        this.leagueDAO = leagueDAO;
-        this.userService = userService;
-        this.sequenceNumberService = sequenceNumberService;
+    public LeagueServiceImpl(LeagueRepository leagueRepository) {
+        this.leagueRepository = leagueRepository;
     }
 
     @Override
-    public League fetchLeague(long leagueId) {
-        return leagueDAO.findLeague(leagueId);
+    public LeagueRepository geLeagueRepository() {
+        return leagueRepository;
     }
 
     @Override
-    public List<League> fetchLeaguesForUser(long userId) {
-        return leagueDAO.findLeaguesForUser(userId);
-    }
-
-    @Override
-    public League createOrUpdateLeague(League league) {
-        if (league.getLeagueId() != null) {
-            return updateLeague(league);
-        } else {
-            return createLeague(league);
+    public League createLeague(CreateLeagueDTO createLeagueDTO) throws InviteCodeAlreadyInUserException {
+        if (!isInviteCodeAvailable(createLeagueDTO.getInviteCode())) {
+            throw new InviteCodeAlreadyInUserException("Invite code is already in use: " + createLeagueDTO.getInviteCode());
         }
+        League league = createLeagueDTO.toLeague();
+        return leagueRepository.insert(league);
     }
 
-    private League createLeague(League league) {
-        if (!isLeagueNameAvailable(league)) {
-            throw new RuntimeException("A league with same name already exists!");
-        }
-        league.setLeagueId(sequenceNumberService.nextSequenceNumber(League.class));
-        leagueDAO.createLeague(league);
-        return league;
-    }
-
-    private League updateLeague(League league) {
-        League oldLeague = leagueDAO.findLeague(league.getLeagueId());
+    @Override
+    public League updateLeague(UpdateLeagueDTO updateLeagueDTO) throws LeagueNotFoundException {
+        League oldLeague = leagueRepository.findOne(updateLeagueDTO.getId());
         if (oldLeague == null) {
-            throw new RuntimeException("Couldn't find a league to update!");
+            throw new LeagueNotFoundException("Cannot find league with ID: " + updateLeagueDTO.getId());
         }
-        if (!oldLeague.getName().equals(league.getName())) {
-            if (!isLeagueNameAvailable(league)) {
-                throw new RuntimeException("A league with same name already exists!");
-            }
-        }
-        oldLeague.setName(league.getName());
-        oldLeague.setAdminUserId(league.getAdminUserId());
-        oldLeague.setCapacity(league.getCapacity());
-        leagueDAO.updateLeague(oldLeague);
-        return oldLeague;
+        oldLeague.setName(updateLeagueDTO.getName());
+        oldLeague.setCapacity(updateLeagueDTO.getCapacity());
+        oldLeague.setInviteCode(updateLeagueDTO.getInviteCode());
+        return leagueRepository.save(oldLeague);
     }
 
     @Override
-    public Optional<League> addUserToLeague(String inviteCode, long userId) {
-        League league = leagueDAO.findLeagueByInviteCode(inviteCode);
+    public League addUserToLeague(String inviteCode, String userId) throws LeagueIsLockedException, LeagueCapacityException {
+        League league = leagueRepository.findByInviteCode(inviteCode);
         if (league.getLocked()) {
-            return null;
+            throw new LeagueIsLockedException("Cannot add user to a locked league: " + league.getName());
         }
-        if (league.getCapacity() == league.getUsers().size()) {
-            return null;
+        if (league.getCapacity() <= league.getUsers().size()) {
+            throw new LeagueCapacityException("Capacity exceeded. League: " + league.getName());
         }
-        league.addUser(userId);
-        leagueDAO.updateLeague(league);
-        return Optional.of(league);
+        league.getUsers().add(userId);
+        return leagueRepository.save(league);
     }
 
     @Override
-    public boolean removeUserFromLeague(long leagueId, long userId) {
-        League league = leagueDAO.findLeague(leagueId);
+    public League removeUserFromLeague(String leagueId, String userId) throws LeagueIsLockedException, LeagueCapacityException, LeagueUserException {
+        League league = leagueRepository.findOne(leagueId);
+        if (league.getAdminUserId().equals(userId)) {
+            throw new LeagueUserException("Cannot remove league admin from league: " + league.getName());
+        }
         if (league.getLocked()) {
-            return false;
+            throw new LeagueIsLockedException("Cannot remove user from a locked league: " + league.getName());
         }
         if (league.getUsers().size() <= 1) {
-            return false;
+            throw new LeagueCapacityException("Cannot remove the last member from league: " + league.getName());
         }
-        league.removeUser(userId);
-        leagueDAO.updateLeague(league);
-        return true;
+        league.getUsers().remove(userId);
+        return leagueRepository.save(league);
     }
 
     @Override
-    public boolean lockLeague(long leagueId) {
-        League league = leagueDAO.findLeague(leagueId);
-        List<Long> users = Lists.newArrayList(league.getUsers());
+    public League lockLeague(String leagueId) throws LeagueCapacityException, LeagueNotFoundException {
+        League league = leagueRepository.findOne(leagueId);
+        if (league == null) {
+            throw new LeagueNotFoundException("League not found with ID: " + leagueId);
+        }
+        List<String> users = Lists.newArrayList(league.getUsers());
         if (users.size() > league.getCapacity()) {
-            throw new RuntimeException("Capacity exceeded, remove some users first!");
+            throw new LeagueCapacityException("Capacity exceeded, remove some users first. League: " + league.getName());
         } else if (users.size() <= 1) {
-            throw new RuntimeException("Add some users to this league to lock it!");
+            throw new LeagueCapacityException("Add some users to this league to lock it. League: " + league.getName());
         }
         int transferTurnUserId = ThreadLocalRandom.current().nextInt(0, users.size());
         league.setFirstTransferUserId(users.get(transferTurnUserId));
         league.setTransferTurnUserId(users.get(transferTurnUserId));
-        Map<Long, Long> transferOrder = Maps.newHashMap();
+        Map<String, String> transferOrder = Maps.newHashMap();
         for (int i = 0; i < users.size(); i++) {
             transferOrder.put(users.get(i), users.get((i + 1) % users.size()));
         }
         league.setTransferOrder(transferOrder);
         league.setLocked(true);
-        leagueDAO.updateLeague(league);
-        return true;
+        return leagueRepository.save(league);
     }
 
     @Override
-    public boolean unlockLeague(long leagueId) {
-        League league = leagueDAO.findLeague(leagueId);
+    public League unlockLeague(String leagueId) throws LeagueNotFoundException {
+        League league = leagueRepository.findOne(leagueId);
+        if (league == null) {
+            throw new LeagueNotFoundException("League not found with ID: " + leagueId);
+        }
         league.setLocked(false);
-        leagueDAO.updateLeague(league);
-        return true;
+        return leagueRepository.save(league);
     }
 
-    private boolean isLeagueNameAvailable(League league) {
-        List<League> leaguesForAdmin = leagueDAO.findLeaguesForAdmin(league.getAdminUserId());
-        for (League leagueInList : leaguesForAdmin) {
-            if (league.getName().equals(leagueInList.getName())) {
-                return false;
-            }
-        }
-        return true;
+    private boolean isInviteCodeAvailable(String inviteCode) {
+        return leagueRepository.findByInviteCode(inviteCode) != null;
     }
+
 }

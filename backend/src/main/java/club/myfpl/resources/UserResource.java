@@ -1,24 +1,32 @@
 package club.myfpl.resources;
 
-import club.myfpl.model.User;
+import club.myfpl.exceptions.EmailAlreadyInUseException;
+import club.myfpl.exceptions.UserNotFoundException;
+import club.myfpl.domain.User;
+import club.myfpl.resources.dto.CreateUserDTO;
 import club.myfpl.resources.dto.UpdateUserDTO;
+import club.myfpl.resources.dto.UserCredentialsDTO;
 import club.myfpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 
 /**
- * User: Saket
- * Date: 08/02/17
- * Time: 5:50 PM
+ * @author Saket
+ * @since 08/02/17
  */
 @Component
-@Path("user")
+@Path("users")
 @Consumes("application/json")
 @Produces("application/json")
 public class UserResource {
+
     private final UserService userService;
 
     @Autowired
@@ -26,57 +34,43 @@ public class UserResource {
         this.userService = userService;
     }
 
-    @POST
-    @Path("update")
-    public Response updateUser(UpdateUserDTO updateUserDTO) {
-        User user = userService.updateUser(updateUserDTO);
+    @GET
+    @Path("{id}")
+    public Response fetchUser(@PathParam("id") String id) {
+        User user = userService.getUserRepository().findOne(id);
+        user.setPassword(null);
         return Response.ok(user).build();
     }
 
     @POST
-    @Path("change-password")
-    public Response changePassword(UserCredentialsDTO userCredentialsDTO) {
-        boolean updated = userService.updatePassword(userCredentialsDTO.userId, userCredentialsDTO.oldPassword, userCredentialsDTO.newPassword);
+    public Response createUser(CreateUserDTO createUserDTO, @Context UriInfo uriInfo) throws EmailAlreadyInUseException {
+        User user = userService.createUser(createUserDTO);
+
+        UriBuilder ub = uriInfo.getAbsolutePathBuilder();
+        URI uri = ub.path(user.getId()).build();
+
+        return Response.created(uri).entity(user).build();
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response updateUser(@PathParam("id") String id, UpdateUserDTO updateUserDTO) throws UserNotFoundException, EmailAlreadyInUseException {
+        updateUserDTO.setId(id);
+        User user = userService.updateUser(updateUserDTO);
+
+        return Response.ok(user).build();
+    }
+
+    @POST
+    @Path("{id}/change-password")
+    public Response changePassword(@PathParam("id") String id, UserCredentialsDTO userCredentialsDTO) {
+        userCredentialsDTO.setId(id);
+        boolean updated = userService.updatePassword(userCredentialsDTO);
         if (updated) {
             return Response.ok().build();
         } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity(false).build();
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
 
-    @GET
-    @Path("fetch/{userId}")
-    public Response fetchUser(@PathParam("userId") long userId) {
-        return Response.ok(userService.fetchUser(userId)).build();
-    }
-
-    private static class UserCredentialsDTO {
-        private Long   userId;
-        private String oldPassword;
-        private String newPassword;
-
-        public Long getUserId() {
-            return userId;
-        }
-
-        public void setUserId(Long userId) {
-            this.userId = userId;
-        }
-
-        public String getOldPassword() {
-            return oldPassword;
-        }
-
-        public void setOldPassword(String oldPassword) {
-            this.oldPassword = oldPassword;
-        }
-
-        public String getNewPassword() {
-            return newPassword;
-        }
-
-        public void setNewPassword(String newPassword) {
-            this.newPassword = newPassword;
-        }
-    }
 }

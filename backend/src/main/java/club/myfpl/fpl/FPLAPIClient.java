@@ -10,9 +10,11 @@ import club.myfpl.fpl.responses.EventDataResponse;
  * Time: 9:04 PM
  */
 public interface FPLAPIClient {
+
     BootstrapDynamicDataResponse fetchBootstrapDynamicData();
 
     BootstrapStaticDataResponse fetchBootstrapStaticData();
 
     EventDataResponse fetchEventData(int event);
+
 }

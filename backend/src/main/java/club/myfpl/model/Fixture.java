@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Fixture {
+
     public static final String FIXTURE_ID_KEY             = "fixtureId";
     public static final String KICKOFF_TIME_FORMATTED_KEY = "kickoffTimeFormatted";
     public static final String KICKOFF_TIME_KEY           = "kickoffTime";
@@ -101,4 +102,5 @@ public class Fixture {
     public void setTeamHomeScore(long teamHomeScore) {
         this.teamHomeScore = teamHomeScore;
     }
+
 }

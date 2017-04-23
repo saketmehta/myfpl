@@ -1,6 +1,6 @@
 package club.myfpl.services.impl;
 
-import club.myfpl.daos.FixtureDAO;
+import club.myfpl.repositories.FixtureDAO;
 import club.myfpl.model.Fixture;
 import club.myfpl.services.FixtureService;
 import org.springframework.beans.factory.annotation.Autowired;

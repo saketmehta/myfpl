@@ -1,6 +1,5 @@
 package club.myfpl.model;
 
-import club.myfpl.utils.Tuple;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -11,13 +10,12 @@ import java.util.Set;
  */
 @Document
 public class UserTeam {
-    private String                  id;
-    private Long                    teamId;
-    private Long                    leagueId;
-    private Long                    userId;
-    private Set<Long>               elements;
-    private Long                    event;
-    private List<Tuple<Long, Long>> transfers;
+    private String         id;
+    private Long           leagueId;
+    private Long           userId;
+    private Set<Long>      elements;
+    private Long           event;
+    private List<Transfer> transfers;
 
     public String getId() {
         return id;
@@ -25,14 +23,6 @@ public class UserTeam {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
     }
 
     public Long getLeagueId() {
@@ -67,11 +57,11 @@ public class UserTeam {
         this.event = event;
     }
 
-    public List<Tuple<Long, Long>> getTransfers() {
+    public List<Transfer> getTransfers() {
         return transfers;
     }
 
-    public void setTransfers(List<Tuple<Long, Long>> transfers) {
+    public void setTransfers(List<Transfer> transfers) {
         this.transfers = transfers;
     }
 }

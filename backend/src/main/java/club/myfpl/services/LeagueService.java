@@ -1,9 +1,10 @@
 package club.myfpl.services;
 
-import club.myfpl.model.League;
-
-import java.util.List;
-import java.util.Optional;
+import club.myfpl.domain.League;
+import club.myfpl.exceptions.*;
+import club.myfpl.repositories.LeagueRepository;
+import club.myfpl.resources.dto.CreateLeagueDTO;
+import club.myfpl.resources.dto.UpdateLeagueDTO;
 
 /**
  * User: Saket
@@ -11,17 +12,19 @@ import java.util.Optional;
  * Time: 3:14 PM
  */
 public interface LeagueService {
-    League fetchLeague(long leagueId);
 
-    List<League> fetchLeaguesForUser(long userId);
+    LeagueRepository geLeagueRepository();
 
-    League createOrUpdateLeague(League league);
+    League createLeague(CreateLeagueDTO createLeagueDTO) throws InviteCodeAlreadyInUserException;
 
-    Optional<League> addUserToLeague(String inviteCode, long userId);
+    League updateLeague(UpdateLeagueDTO updateLeagueDTO) throws LeagueNotFoundException;
 
-    boolean removeUserFromLeague(long leagueId, long userId);
+    League addUserToLeague(String inviteCode, String userId) throws LeagueIsLockedException, LeagueCapacityException;
 
-    boolean lockLeague(long leagueId);
+    League removeUserFromLeague(String leagueId, String userId) throws LeagueIsLockedException, LeagueCapacityException, LeagueUserException;
 
-    boolean unlockLeague(long leagueId);
+    League lockLeague(String leagueId) throws LeagueCapacityException, LeagueNotFoundException;
+
+    League unlockLeague(String leagueId) throws LeagueNotFoundException;
+
 }

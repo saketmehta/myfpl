@@ -6,6 +6,7 @@ package club.myfpl.model;
  * Time: 12:10 AM
  */
 public enum ElementType {
+
     GKP(1L, "Goalkeeper", "GKP", "Goalkeepers", "GKP"),
     DEF(2L, "Defender", "DEF", "Defenders", "DEF"),
     MID(3L, "Midfielder", "MID", "Midfielders", "MID"),
@@ -77,4 +78,5 @@ public enum ElementType {
     public void setPluralShortName(String pluralShortName) {
         this.pluralShortName = pluralShortName;
     }
+
 }

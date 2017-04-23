@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Document
 public class Status {
+
     private String        id;
     private long          currentEvent;
     private long          nextEvent;
@@ -47,4 +48,5 @@ public class Status {
     public void setNextEventFixtures(List<Fixture> nextEventFixtures) {
         this.nextEventFixtures = nextEventFixtures;
     }
+
 }

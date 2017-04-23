@@ -6,6 +6,7 @@ package club.myfpl.model;
  * Time: 5:10 PM
  */
 public class ElementStats {
+
     public static final String ELEMENT_ID_KEY   = "elementId";
     public static final String EVENT_ID_KEY     = "eventId";
     public static final String TOTAL_POINTS_KEY = "totalPoints";
@@ -46,4 +47,5 @@ public class ElementStats {
     public void setTotalPoints(long totalPoints) {
         this.totalPoints = totalPoints;
     }
+
 }

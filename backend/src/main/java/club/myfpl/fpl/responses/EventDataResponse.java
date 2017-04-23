@@ -9,6 +9,7 @@ import java.util.Map;
  * Time: 6:42 PM
  */
 public class EventDataResponse {
+
     private List<FixtureResponse>     fixtures;
     private Map<Long, ElementDetails> elements;
 
@@ -51,4 +52,5 @@ public class EventDataResponse {
             }
         }
     }
+
 }

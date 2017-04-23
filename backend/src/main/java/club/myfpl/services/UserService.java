@@ -1,8 +1,12 @@
 package club.myfpl.services;
 
-import club.myfpl.model.User;
+import club.myfpl.exceptions.EmailAlreadyInUseException;
+import club.myfpl.exceptions.UserNotFoundException;
+import club.myfpl.domain.User;
+import club.myfpl.repositories.UserRepository;
 import club.myfpl.resources.dto.CreateUserDTO;
 import club.myfpl.resources.dto.UpdateUserDTO;
+import club.myfpl.resources.dto.UserCredentialsDTO;
 
 /**
  * User: Saket
@@ -10,15 +14,13 @@ import club.myfpl.resources.dto.UpdateUserDTO;
  * Time: 5:03 PM
  */
 public interface UserService {
-    User createUser(CreateUserDTO createUserDTO);
 
-    User updateUser(UpdateUserDTO updateUserDTO);
+    User createUser(CreateUserDTO createUserDTO) throws EmailAlreadyInUseException;
 
-    User fetchUser(long userId);
+    User updateUser(UpdateUserDTO updateUserDTO) throws EmailAlreadyInUseException, UserNotFoundException;
 
-    User fetchUserByEmail(String email);
+    boolean updatePassword(UserCredentialsDTO userCredentialsDTO);
 
-    User authenticate(String email, String password);
+    UserRepository getUserRepository();
 
-    boolean updatePassword(long userId, String oldPassword, String newPassword);
 }

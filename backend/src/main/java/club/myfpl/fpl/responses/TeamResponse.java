@@ -1,6 +1,6 @@
 package club.myfpl.fpl.responses;
 
-import club.myfpl.model.Team;
+import club.myfpl.domain.Club;
 
 /**
  * User: Saket
@@ -8,6 +8,7 @@ import club.myfpl.model.Team;
  * Time: 5:37 PM
  */
 public class TeamResponse {
+
     private long   id;
     private String name;
     private String short_name;
@@ -36,11 +37,12 @@ public class TeamResponse {
         this.short_name = short_name;
     }
 
-    public Team toTeam() {
-        Team team = new Team();
-        team.setTeamId(id);
-        team.setName(name);
-        team.setShortName(short_name);
-        return team;
+    public Club toClub() {
+        Club club = new Club();
+        club.setId(id);
+        club.setName(name);
+        club.setShortName(short_name);
+        return club;
     }
+
 }

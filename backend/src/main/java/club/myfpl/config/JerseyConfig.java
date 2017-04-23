@@ -1,9 +1,7 @@
 package club.myfpl.config;
 
-import club.myfpl.auth.AuthEndpoint;
-import club.myfpl.resources.FPLProxyResource;
-import club.myfpl.resources.LeagueResource;
-import club.myfpl.resources.UserResource;
+import club.myfpl.repositories.ClubRepository;
+import club.myfpl.resources.*;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
@@ -15,20 +13,26 @@ import javax.ws.rs.ApplicationPath;
  * Time: 11:27 AM
  */
 @Component
-@ApplicationPath("rest")
+@ApplicationPath("api")
 public class JerseyConfig extends ResourceConfig {
+
     public JerseyConfig() {
         registerFilters();
         registerEndpoints();
+        registerInterceptors();
+    }
+
+    private void registerInterceptors() {
     }
 
     private void registerFilters() {
     }
 
     private void registerEndpoints() {
-        register(AuthEndpoint.class);
-        register(FPLProxyResource.class);
         register(UserResource.class);
-        register(LeagueResource.class);
+        register(ClubResource.class);
+        register(PlayerResource.class);
+        register(FPLProxyResource.class);
     }
+
 }

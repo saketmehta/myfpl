@@ -8,6 +8,7 @@ import java.util.List;
  * Time: 11:42 PM
  */
 public class BootstrapStaticDataResponse {
+
     private List<ElementResponse> elements;
     private List<TeamResponse>    teams;
 

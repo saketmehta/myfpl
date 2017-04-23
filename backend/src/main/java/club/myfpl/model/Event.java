@@ -12,6 +12,7 @@ import java.util.List;
  */
 @JsonIgnoreProperties
 public class Event {
+
     public static final String EVENT_ID_KEY = "eventId";
     public static final String FIXTURES_KEY = "fixtures";
 
@@ -43,4 +44,5 @@ public class Event {
     public void setFixtures(List<Long> fixtures) {
         this.fixtures = fixtures;
     }
+
 }

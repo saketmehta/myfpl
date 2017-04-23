@@ -6,9 +6,11 @@ package club.myfpl.fpl;
  * Time: 9:48 PM
  */
 public interface FPLService {
+
     void grabAndSaveBootstrapDynamicData();
 
     void grabAndSaveBootstrapStaticData();
 
     void grabAndSaveEventData(int eventId);
+
 }
